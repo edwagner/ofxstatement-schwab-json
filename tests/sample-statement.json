@@ -1,0 +1,87 @@
+{
+  "FromDate": "12/20/2023",
+  "ToDate": "02/11/2024",
+  "TotalTransactionsAmount": "$526.12",
+  "BrokerageTransactions": [
+    {
+      "Date": "02/12/2024",
+      "Action": "MoneyLink Transfer",
+      "Symbol": "",
+      "Description": "Tfr BANK OF AMERICA",
+      "Price": "",
+      "Quantity": "",
+      "Fees & Comm": "",
+      "Amount": "-$1,500.00"
+    },
+    {
+      "Date": "02/09/2024",
+      "Action": "Sell",
+      "Symbol": "SWVXX",
+      "Description": "SCHWAB VALUE ADVANTAGE MONEY INVESTOR SHARES",
+      "Price": "$1.00",
+      "Quantity": "1,000",
+      "Fees & Comm": "",
+      "Amount": "$1,000.00"
+    },
+    {
+      "Date": "01/22/2024",
+      "Action": "Reinvest Shares",
+      "Symbol": "AAPL",
+      "Description": "Apple Inc.",
+      "Price": "$182.3362",
+      "Quantity": "0.5265",
+      "Fees & Comm": "",
+      "Amount": "-$96.00"
+    },
+    {
+      "Date": "01/22/2024",
+      "Action": "Pr Yr Non Qual Div",
+      "Symbol": "AAPL",
+      "Description": "Apple Inc.",
+      "Price": "",
+      "Quantity": "",
+      "Fees & Comm": "",
+      "Amount": "$96.00"
+    },
+    {
+      "Date": "01/16/2024",
+      "Action": "Cash Dividend",
+      "Symbol": "SWVXX",
+      "Description": "SCHWAB VALUE ADVANTAGE MONEY INV",
+      "Price": "",
+      "Quantity": "",
+      "Fees & Comm": "",
+      "Amount": "$25.81"
+    },
+    {
+      "Date": "01/16/2024 as of 01/15/2024",
+      "Action": "Bank Interest",
+      "Symbol": "",
+      "Description": "BANK INT …1325-013554 TD BANK USA NA",
+      "Price": "",
+      "Quantity": "",
+      "Fees & Comm": "",
+      "Amount": "$0.30"
+    },
+    {
+      "Date": "12/29/2023",
+      "Action": "Short Term Cap Gain",
+      "Symbol": "SWVXX",
+      "Description": "SCHWAB VALUE ADVANTAGE MONEY INV",
+      "Price": "",
+      "Quantity": "",
+      "Fees & Comm": "",
+      "Amount": "$0.01"
+    },
+    {
+      "Date": "09/22/2023",
+      "Action": "Buy",
+      "Symbol": "SWVXX",
+      "Description": "SCHWAB VALUE ADVANTAGE MONEY INV",
+      "Price": "$1.00",
+      "Quantity": "500",
+      "Fees & Comm": "",
+      "Amount": "-$500.00"
+    }
+  ]
+}

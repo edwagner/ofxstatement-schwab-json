@@ -3,12 +3,12 @@ requires = ["setuptools>=61.0"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ofxstatement-sample"
+name = "ofxstatement-schwab-json"
 version = "0.0.1"
 authors = [
-  { name="Andrey Lebedev", email="andrey@lebedev.lt" },
+  { name="Ed Wagner", email="ed@edwagner.org" },
 ]
-description = "Sample plugin for ofxstatement"
+description = "ofxstatement plugin for Schwab JSON exports"
 readme = "README.rst"
 requires-python = ">=3.9"
 classifiers = [
@@ -21,13 +21,19 @@ classifiers = [
     "Operating System :: OS Independent",
     "License :: OSI Approved :: GNU General Public License v3 (GPLv3)",
 ]
-keywords = ["ofx", "banking", "statement", "plugin", "ofxstatement"]
+keywords = ["ofx", "banking", "statement", "plugin", "ofxstatement", "schwab", "json"]
 dependencies = [
   "ofxstatement",
 ]
 
 [project.urls]
-Homepage = "https://github.com/kedder/ofxstatement-sample/"
+Homepage = "https://github.com/edwagner/ofxstatement-schwab-json/"
 
 [project.entry-points."ofxstatement"]
-sample = "ofxstatement_sample.plugin:SamplePlugin"
+schwab_json = "ofxstatement_schwab_json.plugin:SchwabJsonPlugin"
+
+[tool.pytest.ini_options]
+log_cli = true
+log_cli_level = "DEBUG"
+log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
+log_cli_date_format = "%Y-%m-%d %H:%M:%S"

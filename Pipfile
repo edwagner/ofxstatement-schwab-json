@@ -12,5 +12,5 @@ build = "*"
 tomli = "*"
 
 [packages]
-ofxstatement = "*"
-ofxstatement-sample = {editable = true,path = "."}
+ofxstatement = {ref = "release/0.9.0", git = "https://github.com/edwagner/ofxstatement.git"}
+ofxstatement-schwab-json = {editable = true,path = "."}
