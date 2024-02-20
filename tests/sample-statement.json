@@ -24,6 +24,26 @@
       "Amount": "$1,000.00"
     },
     {
+      "Date": "02/08/2024",
+      "Action": "Journaled Shares",
+      "Symbol": "SWVXX",
+      "Description": "SCHWAB VALUE ADVANTAGE MONEY INVESTOR SHARES",
+      "Price": "$1.00",
+      "Quantity": "-6",
+      "Fees & Comm": "",
+      "Amount": ""
+    },
+    {
+      "Date": "02/07/2024",
+      "Action": "Journaled Shares",
+      "Symbol": "",
+      "Description": "TRAN - CASH MOVEMENT OF OUTGOING ACCOUNT TRANSFER",
+      "Price": "",
+      "Quantity": "",
+      "Fees & Comm": "",
+      "Amount": "-$0.09"
+    },
+    {
       "Date": "01/22/2024",
       "Action": "Reinvest Shares",
       "Symbol": "AAPL",
@@ -74,6 +94,36 @@
       "Amount": "$0.01"
     },
     {
+      "Date": "12/12/2023",
+      "Action": "Wire Sent",
+      "Symbol": "",
+      "Description": "WIRED FUNDS DISBURSED",
+      "Price": "",
+      "Quantity": "",
+      "Fees & Comm": "",
+      "Amount": "-$4,005.44"
+    },
+    {
+      "Date": "12/12/2023",
+      "Action": "Misc Cash Entry",
+      "Symbol": "",
+      "Description": "WAIVE WIRE FEE",
+      "Price": "",
+      "Quantity": "",
+      "Fees & Comm": "",
+      "Amount": "$15.00"
+    },
+    {
+      "Date": "12/12/2023",
+      "Action": "Service Fee",
+      "Symbol": "",
+      "Description": "WIRED FUNDS FEE",
+      "Price": "",
+      "Quantity": "",
+      "Fees & Comm": "",
+      "Amount": "-$15.00"
+    },
+    {
       "Date": "09/22/2023",
       "Action": "Buy",
       "Symbol": "SWVXX",
@@ -82,6 +132,16 @@
       "Quantity": "500",
       "Fees & Comm": "",
       "Amount": "-$500.00"
+    },
+    {
+      "Date": "09/22/2023",
+      "Action": "Buy",
+      "Symbol": "SWVXX",
+      "Description": "SCHWAB VALUE ADVANTAGE MONEY INV",
+      "Price": "$1.00",
+      "Quantity": "100",
+      "Fees & Comm": "",
+      "Amount": "-$100.00"
     }
   ]
 }

@@ -43,22 +43,12 @@ class SchwabJsonParser(AbstractStatementParser):
         for tran in transactions:
             date = datetime.strptime(tran["Date"][0:10], '%m/%d/%Y')
             id = self.id_generator.create_id(date)
-            action = tran["Action"]
-            if action == "Bank Interest2":
-                line = StatementLine(
-                    id=id,
-                    date=date,
-                    memo=tran["Description"],
-                    amount=Decimal(re.sub("[$,]","",tran["Amount"])))
-                line.trntype = "INT"
-                self.statement.lines.append(line)
-                continue
-
             line = InvestStatementLine(
                 id=id,
                 date=date,
-                memo=f'{tran["Action"]} {tran["Description"]}',
-                amount=Decimal(re.sub("[$,]","",tran["Amount"])))
+                memo=f'{tran["Action"]} {tran["Description"]}')
+            if len(tran["Amount"]) > 0:
+                line.amount = Decimal(re.sub("[$,]","",tran["Amount"]))
 
             action = tran["Action"]
             if action == "Sell":
@@ -69,7 +59,13 @@ class SchwabJsonParser(AbstractStatementParser):
                 line.unit_price = Decimal(re.sub("[$,]","",tran["Price"]))
                 if len(tran["Fees & Comm"]) > 0:
                     line.fees = Decimal(re.sub("[$,]","",tran["Fees & Comm"]))
-            elif action == "Cash Dividend" or action == "Pr Yr Non Qual Div" or action == "Non-Qualified Div":
+            elif (action == "Cash Dividend"
+                  or action == "Qualified Dividend"
+                  or action == "Non-Qualified Div"
+                  or action == "Pr Yr Non Qual Div"
+                  or action == "Pr Yr Non-Qual Div"
+                  or action == "Qual Div Reinvest"
+                  or action == "Reinvest Dividend"):
                 line.trntype = "INCOME"
                 line.trntype_detailed = "DIV"
                 line.security_id=tran["Symbol"]
@@ -81,13 +77,7 @@ class SchwabJsonParser(AbstractStatementParser):
                 line.trntype = "INCOME"
                 line.trntype_detailed = "CGSHORT"
                 line.security_id=tran["Symbol"]
-            elif action == "MoneyLink Transfer":
-                line.trntype = "INVBANKTRAN"
-                line.trntype_detailed = "XFER"
-            elif action == "Bank Interest" and len(tran["Symbol"]) == 0:
-                line.trntype = "INVBANKTRAN"
-                line.trntype_detailed = "INT"
-            elif action == "Bank Interest":
+            elif action == "Bank Interest" and len(tran["Symbol"]) > 0:
                 line.trntype = "INCOME"
                 line.trntype_detailed = "INTEREST"
                 line.security_id=tran["Symbol"]
@@ -99,9 +89,34 @@ class SchwabJsonParser(AbstractStatementParser):
                 line.unit_price = Decimal(re.sub("[$,]","",tran["Price"]))
                 if len(tran["Fees & Comm"]) > 0:
                     line.fees = Decimal(re.sub("[$,]","",tran["Fees & Comm"]))
+            elif action == "Journaled Shares" and len(tran["Symbol"]) > 0:
+                line.trntype = "TRANSFER"
+                line.security_id=tran["Symbol"]
+                line.units = Decimal(re.sub("[,]","",tran["Quantity"]))
+                if len(tran["Price"]) > 0:
+                    line.unit_price = Decimal(re.sub("[$,]","",tran["Price"]))
+            elif len(tran["Symbol"]) == 0:
+                line.trntype = "INVBANKTRAN"
+                if (action == "Bank Interest"
+                        or action == "Bond Interest"
+                        or action == "Credit Interest"):
+                    line.trntype_detailed = "INT"
+                elif (action == "MoneyLink Transfer"
+                      or action == "Internal Transfer"
+                      or action == "Journal"
+                      or action == "Journaled Shares"):
+                    line.trntype_detailed = "XFER"
+                elif action == "Wire Sent":
+                    line.trntype_detailed = "DEBIT"
+                elif action == "Service Fee":
+                    line.trntype_detailed = "SRVCHG"
+                elif action == "Misc Cash Entry":
+                    line.trntype_detailed = "OTHER"
+                else:
+                    raise Exception(f'Unrecognized bank action: "{action}"')
             else:
                 raise Exception(f'Unrecognized action: "{action}"')
-
+            line.assert_valid()
             self.statement.invest_lines.append(line)
 
 class IdGenerator:

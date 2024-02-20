@@ -30,7 +30,7 @@ Use ``pipenv`` to run the converter::
   $ cd ofxstatement-schwab-json
   $ pipenv sync --dev
   $ pipenv shell
-  $ ofxstatement convert -t schwab_json Name_XXX321_Transactions_20240101-123456.json out.ofx
+  $ ofxstatement convert -t schwab_json Name_* name.ofx
 
 
 Setting up development environment

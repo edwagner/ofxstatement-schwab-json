@@ -23,7 +23,7 @@
         },
         "ofxstatement": {
             "git": "https://github.com/edwagner/ofxstatement.git",
-            "ref": "092f623994ff209b9ced10386f87a163796f8ba9"
+            "ref": "dad580b62e51e6d78d67fc24d8cfb05c1f72ac5b"
         },
         "ofxstatement-schwab-json": {
             "editable": true,
@@ -215,7 +215,7 @@
                 "sha256:23478f88c37f27d76ac8aee6c905017a143b0b1b886c3c9f66bc2fd94f9f5783",
                 "sha256:af72aea155e91adfc61c3ae9e0e342dbc0cba726d6cba4b6c72c1f34e47291cd"
             ],
-            "markers": "python_version >= '3.8'",
+            "markers": "python_version < '3.11'",
             "version": "==4.9.0"
         },
         "zipp": {
