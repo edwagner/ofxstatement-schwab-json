@@ -17,12 +17,10 @@ structure, that is then formatted into an OFX file.
 ofxstatement convert -t schwab_json Name_XXX321_Transactions_20240101-123456.json out.ofx
 ```
 
-Running, for now
-================
+Running
+=======
 
 I've needed to make a few changes to ofxstatement, so this depends on my fork of that project.
-The master branch wasn't installing properly, so my changes are off of the last stable version 0.9.0.
-Eventually those should be rebased on master and offered up as a PR.
 
 Use ``pipenv`` to run the converter::
 
