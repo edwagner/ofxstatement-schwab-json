@@ -46,23 +46,10 @@ class SchwabJsonParser(AbstractStatementParser):
         for tran in transactions:
             date = datetime.strptime(tran["Date"][0:10], "%m/%d/%Y")
             id = self.id_generator.create_id(date)
-            line = InvestStatementLine(
-                id=id, date=date, memo=f'{tran["Action"]} {tran["Description"]}'
-            )
-            if len(tran["Amount"]) > 0:
-                line.amount = Decimal(re.sub("[$,]", "", tran["Amount"]))
 
             action = tran["Action"]
             if action == "Sell":
-                line.trntype = "SELLSTOCK"
-                line.trntype_detailed = "SELL"
-                line.security_id = tran["Symbol"]
-                line.units = Decimal(
-                    "-" + re.sub("[,-]", "", tran["Quantity"])
-                )  # Ensure a negative number
-                line.unit_price = Decimal(re.sub("[$,]", "", tran["Price"]))
-                if len(tran["Fees & Comm"]) > 0:
-                    line.fees = Decimal(re.sub("[$,]", "", tran["Fees & Comm"]))
+                self.add_sell_line(id, date, tran)
             elif (
                 action == "Cash Dividend"
                 or action == "Qualified Dividend"
@@ -72,74 +59,130 @@ class SchwabJsonParser(AbstractStatementParser):
                 or action == "Qual Div Reinvest"
                 or action == "Reinvest Dividend"
             ):
-                line.trntype = "INCOME"
-                line.trntype_detailed = "DIV"
-                line.security_id = tran["Symbol"]
+                self.add_income_line(id, date, "DIV", tran)
             elif action == "Long Term Cap Gain":
-                line.trntype = "INCOME"
-                line.trntype_detailed = "CGLONG"
-                line.security_id = tran["Symbol"]
+                self.add_income_line(id, date, "CGLONG", tran)
             elif action == "Short Term Cap Gain":
-                line.trntype = "INCOME"
-                line.trntype_detailed = "CGSHORT"
-                line.security_id = tran["Symbol"]
+                self.add_income_line(id, date, "CGSHORT", tran)
             elif action == "Bank Interest" and len(tran["Symbol"]) > 0:
-                line.trntype = "INCOME"
-                line.trntype_detailed = "INTEREST"
-                line.security_id = tran["Symbol"]
+                self.add_income_line(id, date, "INTEREST", tran)
             elif action == "Buy" or action == "Reinvest Shares":
-                line.trntype = "BUYSTOCK"
-                line.trntype_detailed = "BUY"
-                line.security_id = tran["Symbol"]
-                line.units = Decimal(re.sub("[,]", "", tran["Quantity"]))
-                line.unit_price = Decimal(re.sub("[$,]", "", tran["Price"]))
-                if len(tran["Fees & Comm"]) > 0:
-                    line.fees = Decimal(re.sub("[$,]", "", tran["Fees & Comm"]))
+                self.add_buy_line(id, date, tran)
             elif len(tran["Symbol"]) > 0 and (
                 action == "Journaled Shares" or action == "Spin-off"
             ):
-                line.trntype = "TRANSFER"
-                line.security_id = tran["Symbol"]
-                line.units = Decimal(re.sub("[,]", "", tran["Quantity"]))
-                if len(tran["Price"]) > 0:
-                    line.unit_price = Decimal(re.sub("[$,]", "", tran["Price"]))
-                else:
-                    line.unit_price = Decimal(0)
-                if line.amount is None:
-                    line.amount = Decimal(0)
-                if action == "Spin-off":
-                    LOGGER.warning(
-                        f"You will probably want to allocate some cost basis for the {line.security_id} spin-off."
-                    )
-            elif len(tran["Symbol"]) == 0 or action == "Cash In Lieu":
-                line.trntype = "INVBANKTRAN"
+                self.add_transfer_line(id, date, tran)
+            elif len(tran["Symbol"]) == 0:
                 if (
                     action == "Bank Interest"
                     or action == "Bond Interest"
                     or action == "Credit Interest"
                 ):
-                    line.trntype_detailed = "INT"
+                    self.add_bank_line(id, date, "INT", tran)
                 elif (
                     action == "MoneyLink Transfer"
                     or action == "Internal Transfer"
                     or action == "Journal"
                     or action == "Journaled Shares"
                 ):
-                    line.trntype_detailed = "XFER"
+                    self.add_bank_line(id, date, "XFER", tran)
                 elif action == "Wire Sent":
-                    line.trntype_detailed = "DEBIT"
+                    self.add_bank_line(id, date, "DEBIT", tran)
                 elif action == "Service Fee":
-                    line.trntype_detailed = "SRVCHG"
+                    self.add_bank_line(id, date, "SRVCHG", tran)
                 elif action == "Misc Cash Entry":
-                    line.trntype_detailed = "OTHER"
-                elif action == "Cash In Lieu":
-                    line.trntype_detailed = "CREDIT"
+                    self.add_bank_line(id, date, "OTHER", tran)
                 else:
                     raise Exception(f'Unrecognized bank action: "{action}"')
+            elif action == "Cash In Lieu":
+                self.add_bank_line(id, date, "CREDIT", tran)
             else:
                 raise Exception(f'Unrecognized action: "{action}"')
-            line.assert_valid()
-            self.statement.invest_lines.append(line)
+
+    def add_buy_line(self, id, date, details):
+        line = InvestStatementLine(
+            id=id,
+            date=date,
+            memo=f'{details["Action"]} {details["Description"]}',
+        )
+        line.trntype = "BUYSTOCK"
+        line.trntype_detailed = "BUY"
+        line.security_id = details["Symbol"]
+        line.units = Decimal(re.sub("[,]", "", details["Quantity"]))
+        line.unit_price = Decimal(re.sub("[$,]", "", details["Price"]))
+        line.amount = Decimal(re.sub("[$,]", "", details["Amount"]))
+        if len(details["Fees & Comm"]) > 0:
+            line.fees = Decimal(re.sub("[$,]", "", details["Fees & Comm"]))
+        line.assert_valid()
+        self.statement.invest_lines.append(line)
+
+    def add_sell_line(self, id, date, details):
+        line = InvestStatementLine(
+            id=id,
+            date=date,
+            memo=f'{details["Action"]} {details["Description"]}',
+        )
+        line.trntype = "SELLSTOCK"
+        line.trntype_detailed = "SELL"
+        line.security_id = details["Symbol"]
+        line.units = Decimal(
+            "-" + re.sub("[,-]", "", details["Quantity"])
+        )  # Ensure a negative number
+        line.unit_price = Decimal(re.sub("[$,]", "", details["Price"]))
+        line.amount = Decimal(re.sub("[$,]", "", details["Amount"]))
+        if len(details["Fees & Comm"]) > 0:
+            line.fees = Decimal(re.sub("[$,]", "", details["Fees & Comm"]))
+        line.assert_valid()
+        self.statement.invest_lines.append(line)
+
+    def add_transfer_line(self, id, date, details):
+        line = InvestStatementLine(
+            id=id,
+            date=date,
+            memo=f'{details["Action"]} {details["Description"]}',
+        )
+        line.trntype = "TRANSFER"
+        line.security_id = details["Symbol"]
+        line.units = Decimal(re.sub("[,]", "", details["Quantity"]))
+        if len(details["Price"]) > 0:
+            line.unit_price = Decimal(re.sub("[$,]", "", details["Price"]))
+        else:
+            line.unit_price = Decimal(0)
+        if len(details["Amount"]) > 0:
+            line.amount = Decimal(re.sub("[$,]", "", details["Amount"]))
+        else:
+            line.amount = Decimal(0)
+        if details["Action"] == "Spin-off":
+            LOGGER.warning(
+                f"You will probably want to allocate some cost basis for the {line.security_id} spin-off."
+            )
+        line.assert_valid()
+        self.statement.invest_lines.append(line)
+
+    def add_income_line(self, id, date, income_type, details):
+        line = InvestStatementLine(
+            id=id,
+            date=date,
+            memo=f'{details["Action"]} {details["Description"]}',
+        )
+        line.trntype = "INCOME"
+        line.trntype_detailed = income_type
+        line.security_id = details["Symbol"]
+        line.amount = Decimal(re.sub("[$,]", "", details["Amount"]))
+        line.assert_valid()
+        self.statement.invest_lines.append(line)
+
+    def add_bank_line(self, id, date, action_type, details):
+        line = InvestStatementLine(
+            id=id,
+            date=date,
+            memo=f'{details["Action"]} {details["Description"]}',
+        )
+        line.trntype = "INVBANKTRAN"
+        line.amount = Decimal(re.sub("[$,]", "", details["Amount"]))
+        line.trntype_detailed = action_type
+        line.assert_valid()
+        self.statement.invest_lines.append(line)
 
 
 class IdGenerator:
