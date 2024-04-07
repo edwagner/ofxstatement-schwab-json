@@ -96,7 +96,7 @@ class SchwabJsonParser(AbstractStatementParser):
                 LOGGER.warning(f'You will probably want to allocate some cost basis for the {line.security_id} spin-off.')
                 if len(tran["Price"]) > 0:
                     line.unit_price = Decimal(re.sub("[$,]","",tran["Price"]))
-            elif len(tran["Symbol"]) == 0:
+            elif len(tran["Symbol"]) == 0 or action == "Cash In Lieu":
                 line.trntype = "INVBANKTRAN"
                 if (action == "Bank Interest"
                         or action == "Bond Interest"
@@ -113,11 +113,12 @@ class SchwabJsonParser(AbstractStatementParser):
                     line.trntype_detailed = "SRVCHG"
                 elif action == "Misc Cash Entry":
                     line.trntype_detailed = "OTHER"
+                elif action == "Cash In Lieu":
+                    line.trntype_detailed = "CREDIT"
                 else:
                     raise Exception(f'Unrecognized bank action: "{action}"')
             else:
                 raise Exception(f'Unrecognized action: "{action}"')
-            LOGGER.info(line)
             line.assert_valid()
             self.statement.invest_lines.append(line)
 

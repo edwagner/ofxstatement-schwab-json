@@ -2,6 +2,7 @@ import os
 
 import ofxstatement
 import pytest
+from decimal import Decimal
 
 from ofxstatement_schwab_json.plugin import SchwabJsonPlugin
 
@@ -19,7 +20,7 @@ def statement() -> ofxstatement.statement.Statement:
 
 def test_parsing(statement):
     assert statement is not None
-    assert len(statement.invest_lines) == 15
+    assert len(statement.invest_lines) == 16
 
 def test_ids(statement):
     assert statement.invest_lines[0].id == "20230922-1"
@@ -75,3 +76,9 @@ def test_spin_off(statement):
     assert line.trntype_detailed is None
     assert line.units == 123
     assert line.amount is None
+
+def test_cash_in_lieu(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20240402-1")
+    assert line.trntype == "INVBANKTRAN"
+    assert line.trntype_detailed == "CREDIT"
+    assert line.amount == Decimal('32.68')
