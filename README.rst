@@ -20,8 +20,6 @@ ofxstatement convert -t schwab_json Name_XXX321_Transactions_20240101-123456.jso
 Running
 =======
 
-I've needed to make a few changes to ofxstatement, so this depends on my fork of that project.
-
 Use ``pipenv`` to run the converter::
 
   $ pip3 install pipenv --user (if it hasn't already been set up)
@@ -50,3 +48,4 @@ environment. After this, you should be able to do::
 
     schwab_json      Parses Schwab JSON export of investment transactions
 
+OFX specification: https://financialdataexchange.org/common/Uploaded%20files/OFX%20files/OFX%20Banking%20Specification%20v2.3.pdf

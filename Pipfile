@@ -12,5 +12,5 @@ build = "*"
 tomli = "*"
 
 [packages]
-ofxstatement = {ref = "invest-statement-enhancements", git = "https://github.com/edwagner/ofxstatement.git"}
+ofxstatement = {ref = "master", git = "https://github.com/kedder/ofxstatement.git"}
 ofxstatement-schwab-json = {editable = true,path = "."}
