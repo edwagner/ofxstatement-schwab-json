@@ -93,9 +93,14 @@ class SchwabJsonParser(AbstractStatementParser):
                 line.trntype = "TRANSFER"
                 line.security_id=tran["Symbol"]
                 line.units = Decimal(re.sub("[,]","",tran["Quantity"]))
-                LOGGER.warning(f'You will probably want to allocate some cost basis for the {line.security_id} spin-off.')
                 if len(tran["Price"]) > 0:
                     line.unit_price = Decimal(re.sub("[$,]","",tran["Price"]))
+                else:
+                    line.unit_price = Decimal(0)
+                if line.amount is None:
+                    line.amount = Decimal(0)
+                if action == "Spin-off":
+                    LOGGER.warning(f'You will probably want to allocate some cost basis for the {line.security_id} spin-off.')
             elif len(tran["Symbol"]) == 0 or action == "Cash In Lieu":
                 line.trntype = "INVBANKTRAN"
                 if (action == "Bank Interest"

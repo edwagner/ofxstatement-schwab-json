@@ -41,7 +41,8 @@ def test_journal_security(statement):
     assert line.trntype == "TRANSFER"
     assert line.trntype_detailed is None
     assert line.units == -6
-    assert line.amount is None
+    assert line.amount == 0
+    assert line.unit_price == 1
 
 def test_sell(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240209-1")
@@ -75,7 +76,8 @@ def test_spin_off(statement):
     assert line.trntype == "TRANSFER"
     assert line.trntype_detailed is None
     assert line.units == 123
-    assert line.amount is None
+    assert line.amount == 0
+    assert line.unit_price == 0
 
 def test_cash_in_lieu(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240402-1")
