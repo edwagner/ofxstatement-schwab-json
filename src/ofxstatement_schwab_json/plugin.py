@@ -89,10 +89,11 @@ class SchwabJsonParser(AbstractStatementParser):
                 line.unit_price = Decimal(re.sub("[$,]","",tran["Price"]))
                 if len(tran["Fees & Comm"]) > 0:
                     line.fees = Decimal(re.sub("[$,]","",tran["Fees & Comm"]))
-            elif action == "Journaled Shares" and len(tran["Symbol"]) > 0:
+            elif len(tran["Symbol"]) > 0 and (action == "Journaled Shares" or action == "Spin-off"):
                 line.trntype = "TRANSFER"
                 line.security_id=tran["Symbol"]
                 line.units = Decimal(re.sub("[,]","",tran["Quantity"]))
+                LOGGER.warning(f'You will probably want to allocate some cost basis for the {line.security_id} spin-off.')
                 if len(tran["Price"]) > 0:
                     line.unit_price = Decimal(re.sub("[$,]","",tran["Price"]))
             elif len(tran["Symbol"]) == 0:
@@ -116,6 +117,7 @@ class SchwabJsonParser(AbstractStatementParser):
                     raise Exception(f'Unrecognized bank action: "{action}"')
             else:
                 raise Exception(f'Unrecognized action: "{action}"')
+            LOGGER.info(line)
             line.assert_valid()
             self.statement.invest_lines.append(line)
 

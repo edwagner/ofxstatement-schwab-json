@@ -4,6 +4,16 @@
   "TotalTransactionsAmount": "$526.12",
   "BrokerageTransactions": [
     {
+      "Date": "04/01/2024",
+      "Action": "Spin-off",
+      "Symbol": "SOLV",
+      "Description": "SOLVENTUM CORP",
+      "Quantity": "123",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": ""
+    },
+    {
       "Date": "02/12/2024",
       "Action": "MoneyLink Transfer",
       "Symbol": "",
