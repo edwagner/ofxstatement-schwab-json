@@ -2,6 +2,7 @@ from datetime import datetime
 from decimal import Decimal
 import re
 from os import path
+from typing import Dict
 
 from ofxstatement.plugin import Plugin
 from ofxstatement.parser import AbstractStatementParser
@@ -136,7 +137,7 @@ class IdGenerator:
     """
 
     def __init__(self) -> None:
-        self.date_count = {}
+        self.date_count: Dict[datetime, int] = {}
 
     def create_id(self, date) -> str:
         self.date_count[date] = self.date_count.get(date, 0) + 1

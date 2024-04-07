@@ -39,6 +39,9 @@ Setting up dev environment for writing a plugin is easy::
   $ pipenv sync --dev
   $ pipenv shell
   $ pytest
+  $ pip3 install mypy black
+  $ mypy src
+  $ black src
 
 This will download all the dependencies and install them into your virtual
 environment. After this, you should be able to do::
