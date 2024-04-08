@@ -31,16 +31,24 @@ def test_ids(statement):
     assert statement.invest_lines[1].id == "20230922-2"
 
 
-def test_transfer(statement):
+def test_transfer_cash(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240212-1")
     assert line.trntype == "INVBANKTRAN"
     assert line.trntype_detailed == "XFER"
+    assert line.amount == -1500
+    assert line.security_id is None
+    assert line.units is None
+    assert line.unit_price is None
 
 
 def test_journal_cash(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240207-1")
     assert line.trntype == "INVBANKTRAN"
     assert line.trntype_detailed == "XFER"
+    assert line.amount == Decimal("-0.09")
+    assert line.security_id is None
+    assert line.units is None
+    assert line.unit_price is None
 
 
 def test_journal_security(statement):
@@ -48,8 +56,9 @@ def test_journal_security(statement):
     assert line.trntype == "TRANSFER"
     assert line.trntype_detailed is None
     assert line.units == -6
-    assert line.amount == 0
+    assert line.security_id == "SWVXX"
     assert line.unit_price == 1
+    assert line.amount == 0
 
 
 def test_sell(statement):
@@ -58,36 +67,55 @@ def test_sell(statement):
     assert line.trntype_detailed == "SELL"
     assert line.units == -1000
     assert line.amount == 1000
+    assert line.security_id == "SWVXX"
+    assert line.unit_price == 1
 
 
 def test_interest(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240116-1")
     assert line.trntype == "INVBANKTRAN"
     assert line.trntype_detailed == "INT"
+    assert line.amount == Decimal("0.30")
+    assert line.security_id is None
+    assert line.units is None
+    assert line.unit_price is None
 
 
 def test_wire(statement):
     line = next(x for x in statement.invest_lines if x.id == "20231212-3")
     assert line.trntype == "INVBANKTRAN"
     assert line.trntype_detailed == "DEBIT"
+    assert line.amount == Decimal("-4005.44")
+    assert line.security_id is None
+    assert line.units is None
+    assert line.unit_price is None
 
 
 def test_bank_fee(statement):
     line = next(x for x in statement.invest_lines if x.id == "20231212-1")
     assert line.trntype == "INVBANKTRAN"
     assert line.trntype_detailed == "SRVCHG"
+    assert line.amount == Decimal("-15")
+    assert line.security_id is None
+    assert line.units is None
+    assert line.unit_price is None
 
 
 def test_bank_misc(statement):
     line = next(x for x in statement.invest_lines if x.id == "20231212-2")
     assert line.trntype == "INVBANKTRAN"
     assert line.trntype_detailed == "OTHER"
+    assert line.amount == Decimal("15")
+    assert line.security_id is None
+    assert line.units is None
+    assert line.unit_price is None
 
 
 def test_spin_off(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240401-1")
     assert line.trntype == "TRANSFER"
     assert line.trntype_detailed is None
+    assert line.security_id == "SOLV"
     assert line.units == 123
     assert line.amount == 0
     assert line.unit_price == 0
@@ -98,3 +126,6 @@ def test_cash_in_lieu(statement):
     assert line.trntype == "INVBANKTRAN"
     assert line.trntype_detailed == "CREDIT"
     assert line.amount == Decimal("32.68")
+    assert line.security_id is None
+    assert line.units is None
+    assert line.unit_price is None
