@@ -40,6 +40,12 @@ The following plugins are available:
   schwab_json      Parses Schwab JSON export of investment transactions
 ```
 
+## Packaging
+
+```
+$ python -m build
+```
+
 ## References
 
 * [OFX specification](https://financialdataexchange.org/common/Uploaded%20files/OFX%20files/OFX%20Banking%20Specification%20v2.3.pdf)
