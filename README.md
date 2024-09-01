@@ -40,6 +40,10 @@ The following plugins are available:
   schwab_json      Parses Schwab JSON export of investment transactions
 ```
 
+### Upgrading Dependencies
+
+After running `pipenv shell`, run `pipenv update` to update everything.
+
 ## Packaging
 
 ```
