@@ -23,7 +23,7 @@ def statement() -> ofxstatement.statement.Statement:
 
 def test_parsing(statement):
     assert statement is not None
-    assert len(statement.invest_lines) == 16
+    assert len(statement.invest_lines) == 17
 
 
 def test_ids(statement):
@@ -59,6 +59,16 @@ def test_journal_security(statement):
     assert line.security_id == "SWVXX"
     assert line.unit_price == 1
     assert line.amount == 0
+
+
+def test_buy(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20230922-1")
+    assert line.trntype == "BUYSTOCK"
+    assert line.trntype_detailed == "BUY"
+    assert line.units == 100
+    assert line.amount == -100
+    assert line.security_id == "SWVXX"
+    assert line.unit_price == 1
 
 
 def test_sell(statement):
@@ -109,6 +119,16 @@ def test_bank_misc(statement):
     assert line.security_id is None
     assert line.units is None
     assert line.unit_price is None
+
+
+def test_split(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20241011-1")
+    assert line.trntype == "TRANSFER"
+    assert line.trntype_detailed is None
+    assert line.security_id == "SCHG"
+    assert line.units == 300
+    assert line.amount == 0
+    assert line.unit_price == Decimal("26.3375")
 
 
 def test_spin_off(statement):
