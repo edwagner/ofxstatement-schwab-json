@@ -54,6 +54,7 @@ class SchwabJsonParser(AbstractStatementParser):
                 action == "Cash Dividend"
                 or action == "Qualified Dividend"
                 or action == "Non-Qualified Div"
+                or action == "Pr Yr Cash Div"
                 or action == "Pr Yr Non Qual Div"
                 or action == "Pr Yr Non-Qual Div"
                 or action == "Qual Div Reinvest"
@@ -72,6 +73,7 @@ class SchwabJsonParser(AbstractStatementParser):
                 action == "Journaled Shares"
                 or action == "Spin-off"
                 or action == "Stock Split"
+                or action == "Security Transfer"
             ):
                 self.add_transfer_line(id, date, tran)
             elif len(tran["Symbol"]) == 0:
@@ -86,6 +88,7 @@ class SchwabJsonParser(AbstractStatementParser):
                     or action == "Internal Transfer"
                     or action == "Journal"
                     or action == "Journaled Shares"
+                    or action == "Security Transfer"
                 ):
                     self.add_bank_line(id, date, "XFER", tran)
                 elif action == "Wire Sent":

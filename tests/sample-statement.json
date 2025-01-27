@@ -4,6 +4,16 @@
   "TotalTransactionsAmount": "$526.12",
   "BrokerageTransactions": [
     {
+      "Date": "01/10/2025",
+      "Action": "Pr Yr Cash Div",
+      "Symbol": "HASI",
+      "Description": "HA SUSTAINABLE INFRASTRUREIT",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$622.50"
+    },
+    {
       "Date": "10/11/2024 as of 10/10/2024",
       "Action": "Stock Split",
       "Symbol": "SCHG",
@@ -84,7 +94,27 @@
       "Amount": "-$96.00"
     },
     {
-      "Date": "01/22/2024",
+      "Date": "01/21/2024",
+      "Action": "Security Transfer",
+      "Symbol": "",
+      "Description": "TOA ACAT 0226",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$1,000.00"
+    },
+    {
+      "Date": "01/20/2024",
+      "Action": "Security Transfer",
+      "Symbol": "AAPL",
+      "Description": "Apple Inc.",
+      "Quantity": "1,377",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": ""
+    },
+    {
+      "Date": "01/19/2024",
       "Action": "Pr Yr Non Qual Div",
       "Symbol": "AAPL",
       "Description": "Apple Inc.",
@@ -94,7 +124,17 @@
       "Amount": "$96.00"
     },
     {
-      "Date": "01/16/2024",
+      "Date": "01/18/2024",
+      "Action": "Pr Yr Non-Qual Div",
+      "Symbol": "AAPL",
+      "Description": "Apple Inc.",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$100.76"
+    },
+    {
+      "Date": "01/17/2024",
       "Action": "Cash Dividend",
       "Symbol": "SWVXX",
       "Description": "SCHWAB VALUE ADVANTAGE MONEY INV",
