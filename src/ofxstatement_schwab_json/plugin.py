@@ -59,6 +59,7 @@ class SchwabJsonParser(AbstractStatementParser):
                 or action == "Pr Yr Non-Qual Div"
                 or action == "Qual Div Reinvest"
                 or action == "Reinvest Dividend"
+                or action == "Div Adjustment"
             ):
                 self.add_income_line(id, date, "DIV", tran)
             elif action == "Long Term Cap Gain":
@@ -69,6 +70,8 @@ class SchwabJsonParser(AbstractStatementParser):
                 self.add_income_line(id, date, "INTEREST", tran)
             elif action == "Buy" or action == "Reinvest Shares":
                 self.add_buy_line(id, date, tran)
+            elif action == "ADR Mgmt Fee":
+                self.add_bank_line(id, date, "SRVCHG", tran)
             elif len(tran["Symbol"]) > 0 and (
                 action == "Journaled Shares"
                 or action == "Spin-off"

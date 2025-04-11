@@ -23,7 +23,7 @@ def statement() -> ofxstatement.statement.Statement:
 
 def test_parsing(statement):
     assert statement is not None
-    assert len(statement.invest_lines) == 21
+    assert len(statement.invest_lines) == 23
 
 
 def test_ids(statement):
@@ -50,6 +50,7 @@ def test_journal_cash(statement):
     assert line.units is None
     assert line.unit_price is None
 
+
 def test_security_transfer_cash(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240121-1")
     assert line.trntype == "INVBANKTRAN"
@@ -59,6 +60,7 @@ def test_security_transfer_cash(statement):
     assert line.units is None
     assert line.unit_price is None
 
+
 def test_journal_security(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240208-1")
     assert line.trntype == "TRANSFER"
@@ -67,6 +69,7 @@ def test_journal_security(statement):
     assert line.security_id == "SWVXX"
     assert line.unit_price == 1
     assert line.amount == 0
+
 
 def test_security_transfer(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240120-1")
@@ -97,6 +100,7 @@ def test_sell(statement):
     assert line.security_id == "SWVXX"
     assert line.unit_price == 1
 
+
 def test_dividend(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240117-1")
     assert line.trntype == "INCOME"
@@ -105,6 +109,7 @@ def test_dividend(statement):
     assert line.amount == Decimal("25.81")
     assert line.security_id == "SWVXX"
     assert line.unit_price is None
+
 
 def test_dividend2(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240118-1")
@@ -115,6 +120,7 @@ def test_dividend2(statement):
     assert line.security_id == "AAPL"
     assert line.unit_price is None
 
+
 def test_dividend3(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240119-1")
     assert line.trntype == "INCOME"
@@ -124,6 +130,7 @@ def test_dividend3(statement):
     assert line.security_id == "AAPL"
     assert line.unit_price is None
 
+
 def test_dividend4(statement):
     line = next(x for x in statement.invest_lines if x.id == "20250110-1")
     assert line.trntype == "INCOME"
@@ -132,6 +139,7 @@ def test_dividend4(statement):
     assert line.amount == Decimal("622.50")
     assert line.security_id == "HASI"
     assert line.unit_price is None
+
 
 def test_interest(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240116-1")
@@ -200,4 +208,24 @@ def test_cash_in_lieu(statement):
     assert line.amount == Decimal("32.68")
     assert line.security_id is None
     assert line.units is None
+    assert line.unit_price is None
+
+
+def test_div_adjustment(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20250228-1")
+    assert line.trntype == "INCOME"
+    assert line.trntype_detailed == "DIV"
+    assert line.units is None
+    assert line.amount == Decimal("-1.50")
+    assert line.security_id == "GEV"
+    assert line.unit_price is None
+
+
+def test_adr_mgmt_fee(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20250410-1")
+    assert line.trntype == "INVBANKTRAN"
+    assert line.trntype_detailed == "SRVCHG"
+    assert line.units is None
+    assert line.amount == Decimal("-2.63")
+    assert line.security_id is None
     assert line.unit_price is None

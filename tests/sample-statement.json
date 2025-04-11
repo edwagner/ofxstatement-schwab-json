@@ -4,6 +4,26 @@
   "TotalTransactionsAmount": "$526.12",
   "BrokerageTransactions": [
     {
+      "Date": "04/10/2025",
+      "Action": "ADR Mgmt Fee",
+      "Symbol": "GSK",
+      "Description": "GSK PLC ADR FSPONSORED ADR 1 ADR REPS 2 ORD SHS",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$2.63"
+    },
+    {
+      "Date": "02/28/2025 as of 01/28/2025",
+      "Action": "Div Adjustment",
+      "Symbol": "GEV",
+      "Description": "GE VERNOVA INC",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$1.50"
+    },
+    {
       "Date": "01/10/2025",
       "Action": "Pr Yr Cash Div",
       "Symbol": "HASI",
