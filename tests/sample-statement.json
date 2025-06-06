@@ -4,6 +4,16 @@
   "TotalTransactionsAmount": "$526.12",
   "BrokerageTransactions": [
     {
+      "Date": "05/15/2025",
+      "Action": "NRA Tax Adj",
+      "Symbol": "AAPL",
+      "Description": "APPLE INC",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$0.29"
+    },
+    {
       "Date": "04/10/2025",
       "Action": "ADR Mgmt Fee",
       "Symbol": "GSK",

@@ -68,6 +68,8 @@ class SchwabJsonParser(AbstractStatementParser):
                 self.add_income_line(id, date, "CGSHORT", tran)
             elif action == "Bank Interest" and len(tran["Symbol"]) > 0:
                 self.add_income_line(id, date, "INTEREST", tran)
+            elif action == "NRA Tax Adj" and len(tran["Symbol"]) > 0:
+                self.add_invexpense_line(id, date, tran)
             elif action == "Buy" or action == "Reinvest Shares":
                 self.add_buy_line(id, date, tran)
             elif action == "ADR Mgmt Fee":
@@ -179,6 +181,18 @@ class SchwabJsonParser(AbstractStatementParser):
         )
         line.trntype = "INCOME"
         line.trntype_detailed = income_type
+        line.security_id = details["Symbol"]
+        line.amount = Decimal(re.sub("[$,]", "", details["Amount"]))
+        line.assert_valid()
+        self.statement.invest_lines.append(line)
+
+    def add_invexpense_line(self, id, date, details):
+        line = InvestStatementLine(
+            id=id,
+            date=date,
+            memo=f'{details["Action"]} {details["Description"]}',
+        )
+        line.trntype = "INVEXPENSE"
         line.security_id = details["Symbol"]
         line.amount = Decimal(re.sub("[$,]", "", details["Amount"]))
         line.assert_valid()
