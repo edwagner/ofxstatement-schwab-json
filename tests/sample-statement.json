@@ -4,6 +4,16 @@
   "TotalTransactionsAmount": "$526.12",
   "BrokerageTransactions": [
     {
+      "Date": "03/21/2025",
+      "Action": "Special Dividend",
+      "Symbol": "MTUM",
+      "Description": "ISHARES MSCI USA MOMNTUMFCT ETF",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$19.59"
+    },
+    {
       "Date": "06/10/2025",
       "Action": "Advisor Fee",
       "Symbol": "",

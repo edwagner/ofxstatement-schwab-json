@@ -59,6 +59,7 @@ class SchwabJsonParser(AbstractStatementParser):
                 or action == "Pr Yr Non-Qual Div"
                 or action == "Qual Div Reinvest"
                 or action == "Reinvest Dividend"
+                or action == "Special Dividend"
                 or action == "Div Adjustment"
             ):
                 self.add_income_line(id, date, "DIV", tran)
