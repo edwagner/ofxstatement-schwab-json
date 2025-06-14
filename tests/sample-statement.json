@@ -4,6 +4,16 @@
   "TotalTransactionsAmount": "$526.12",
   "BrokerageTransactions": [
     {
+      "Date": "05/29/2025",
+      "Action": "Bank Transfer",
+      "Symbol": "",
+      "Description": "JOURNAL FUNDS TO INVESTOR CHECKING",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$100.00"
+    },
+    {
       "Date": "03/21/2025",
       "Action": "Special Dividend",
       "Symbol": "MTUM",

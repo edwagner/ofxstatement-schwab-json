@@ -23,7 +23,7 @@ def statement() -> ofxstatement.statement.Statement:
 
 def test_parsing(statement):
     assert statement is not None
-    assert len(statement.invest_lines) == 26
+    assert len(statement.invest_lines) == 27
 
 
 def test_ids(statement):
@@ -36,6 +36,16 @@ def test_transfer_cash(statement):
     assert line.trntype == "INVBANKTRAN"
     assert line.trntype_detailed == "XFER"
     assert line.amount == -1500
+    assert line.security_id is None
+    assert line.units is None
+    assert line.unit_price is None
+
+
+def test_transfer_cash_bank(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20250529-1")
+    assert line.trntype == "INVBANKTRAN"
+    assert line.trntype_detailed == "XFER"
+    assert line.amount == -100
     assert line.security_id is None
     assert line.units is None
     assert line.unit_price is None

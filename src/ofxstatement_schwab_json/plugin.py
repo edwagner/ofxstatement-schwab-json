@@ -93,6 +93,7 @@ class SchwabJsonParser(AbstractStatementParser):
                     self.add_bank_line(id, date, "INT", tran)
                 elif (
                     action == "MoneyLink Transfer"
+                    or action == "Bank Transfer"
                     or action == "Internal Transfer"
                     or action == "Journal"
                     or action == "Journaled Shares"
