@@ -23,7 +23,7 @@ def statement() -> ofxstatement.statement.Statement:
 
 def test_parsing(statement):
     assert statement is not None
-    assert len(statement.invest_lines) == 27
+    assert len(statement.invest_lines) == 29
 
 
 def test_ids(statement):
@@ -79,6 +79,26 @@ def test_journal_security(statement):
     assert line.security_id == "SWVXX"
     assert line.unit_price == 1
     assert line.amount == 0
+
+
+def test_journal_security2(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20250602-1")
+    assert line.trntype == "TRANSFER"
+    assert line.trntype_detailed is None
+    assert line.units == Decimal("-103.26")
+    assert line.security_id == "SNSXX"
+    assert line.unit_price == Decimal("0")
+    assert line.amount == Decimal("0")
+
+
+def test_journal_security3(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20250602-2")
+    assert line.trntype == "TRANSFER"
+    assert line.trntype_detailed is None
+    assert line.units == Decimal("103.26")
+    assert line.security_id == "SNSXX"
+    assert line.unit_price == Decimal("0")
+    assert line.amount == Decimal("0")
 
 
 def test_security_transfer(statement):

@@ -4,6 +4,26 @@
   "TotalTransactionsAmount": "$526.12",
   "BrokerageTransactions": [
     {
+      "Date": "06/02/2025",
+      "Action": "Journal",
+      "Symbol": "SNSXX",
+      "Description": "SCHWAB US TREASURY MONEY INVESTOR",
+      "Quantity": "103.26",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": ""
+    },
+    {
+      "Date": "06/02/2025",
+      "Action": "Journal",
+      "Symbol": "SNSXX",
+      "Description": "SCHWAB US TREASURY MONEY INVESTOR",
+      "Quantity": "-103.26",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": ""
+    },
+    {
       "Date": "05/29/2025",
       "Action": "Bank Transfer",
       "Symbol": "",
