@@ -4,6 +4,16 @@
   "TotalTransactionsAmount": "$526.12",
   "BrokerageTransactions": [
     {
+      "Date": "06/10/2025",
+      "Action": "Advisor Fee",
+      "Symbol": "",
+      "Description": "MGMTFEE TO ADVISOR",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$419.08"
+    },
+    {
       "Date": "05/15/2025",
       "Action": "NRA Tax Adj",
       "Symbol": "AAPL",

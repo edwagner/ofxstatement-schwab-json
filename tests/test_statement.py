@@ -23,7 +23,7 @@ def statement() -> ofxstatement.statement.Statement:
 
 def test_parsing(statement):
     assert statement is not None
-    assert len(statement.invest_lines) == 24
+    assert len(statement.invest_lines) == 25
 
 
 def test_ids(statement):
@@ -237,4 +237,14 @@ def test_nra_tax_adj(statement):
     assert line.units is None
     assert line.amount == Decimal("-0.29")
     assert line.security_id == "AAPL"
+    assert line.unit_price is None
+
+
+def test_advisor_fee(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20250610-1")
+    assert line.trntype == "INVBANKTRAN"
+    assert line.trntype_detailed == "XFER"
+    assert line.units is None
+    assert line.amount == Decimal("-419.08")
+    assert line.security_id is None
     assert line.unit_price is None
