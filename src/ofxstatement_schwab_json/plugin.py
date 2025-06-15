@@ -15,6 +15,21 @@ LOGGER = logging.getLogger(__name__)
 import json
 
 
+def _by_date(details):
+    """Returns a sort key for the transaction.
+
+    Sort by ascending date, then add other fields as tie-breakers.
+    """
+    date = datetime.strptime(details["Date"][0:10], "%m/%d/%Y").date()
+    action = details.get("Action", "")
+    symbol = details.get("Symbol", "")
+    amount = Decimal(
+        re.sub("[$,]", "", details.get("Amount", "") or "0"))
+    quantity = Decimal(
+        re.sub("[$,]", "", details.get("Quantity", "") or "0"))
+    return (date, action, symbol, amount, quantity)
+
+
 class SchwabJsonPlugin(Plugin):
     """Parses Schwab JSON export of investment transactions"""
 
@@ -38,8 +53,8 @@ class SchwabJsonParser(AbstractStatementParser):
     def parse(self) -> Statement:
         """Main entry point for parsers"""
         with open(self.filename, "r") as f:
-            # Reverse the lines so that they are in chronological order
-            self.import_lines(reversed(json.load(f)["BrokerageTransactions"]))
+            self.import_lines(
+                sorted(json.load(f)["BrokerageTransactions"], key=_by_date))
             return self.statement
 
     def import_lines(self, transactions):

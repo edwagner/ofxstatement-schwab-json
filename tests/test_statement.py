@@ -85,8 +85,8 @@ def test_buy(statement):
     line = next(x for x in statement.invest_lines if x.id == "20230922-1")
     assert line.trntype == "BUYSTOCK"
     assert line.trntype_detailed == "BUY"
-    assert line.units == 100
-    assert line.amount == -100
+    assert line.units == 500
+    assert line.amount == -500
     assert line.security_id == "SWVXX"
     assert line.unit_price == 1
 
@@ -162,7 +162,7 @@ def test_wire(statement):
 
 
 def test_bank_fee(statement):
-    line = next(x for x in statement.invest_lines if x.id == "20231212-1")
+    line = next(x for x in statement.invest_lines if x.id == "20231212-2")
     assert line.trntype == "INVBANKTRAN"
     assert line.trntype_detailed == "SRVCHG"
     assert line.amount == Decimal("-15")
@@ -172,7 +172,7 @@ def test_bank_fee(statement):
 
 
 def test_bank_misc(statement):
-    line = next(x for x in statement.invest_lines if x.id == "20231212-2")
+    line = next(x for x in statement.invest_lines if x.id == "20231212-1")
     assert line.trntype == "INVBANKTRAN"
     assert line.trntype_detailed == "OTHER"
     assert line.amount == Decimal("15")
