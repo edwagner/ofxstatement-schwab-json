@@ -14,6 +14,12 @@ LOGGER = logging.getLogger(__name__)
 
 import json
 
+POSTED_TRANSACTION_TYPES = {
+    # Map Schwab PostedTransactions types to ofxstatement TRANSACTION_TYPES
+    "ATM": "ATM",
+    "INTADJUST": "INT",
+    "TRANSFER": "XFER",
+}
 
 class SchwabJsonPlugin(Plugin):
     """Parses Schwab JSON export of investment transactions"""
@@ -39,11 +45,26 @@ class SchwabJsonParser(AbstractStatementParser):
         """Main entry point for parsers"""
         with open(self.filename, "r") as f:
             # Reverse the lines so that they are in chronological order
-            self.import_lines(reversed(json.load(f)["BrokerageTransactions"]))
+            loaded = json.load(f)
+            posted_transactions = reversed(
+                # Banking / Checking accounts
+                loaded.get("PostedTransactions", []))
+            brokerage_transactions = reversed(
+                # Brokerage accounts
+                loaded.get("BrokerageTransactions", []))
+            self.import_lines(
+                posted_transactions = posted_transactions,
+                brokerage_transactions = brokerage_transactions,
+            )
             return self.statement
 
-    def import_lines(self, transactions):
-        for tran in transactions:
+    def import_lines(self, posted_transactions, brokerage_transactions):
+        for tran in posted_transactions:
+            date = datetime.strptime(tran["Date"][0:10], "%m/%d/%Y")
+            id = self.id_generator.create_id(date)
+            self.add_statement_line(id, date, tran)
+
+        for tran in brokerage_transactions:
             date = datetime.strptime(tran["Date"][0:10], "%m/%d/%Y")
             id = self.id_generator.create_id(date)
 
@@ -209,6 +230,27 @@ class SchwabJsonParser(AbstractStatementParser):
         line.trntype_detailed = action_type
         line.assert_valid()
         self.statement.invest_lines.append(line)
+
+    def add_statement_line(self, id, date, details):
+        withdrawal = Decimal(
+            f'-{re.sub("[$,]", "", details["Withdrawal"])}'
+        ) if details.get("Withdrawal") else None
+
+        deposit = Decimal(
+            f'{re.sub("[$,]", "", details["Deposit"])}'
+        ) if details.get("Deposit") else None
+
+        line = StatementLine(
+            id=id,
+            date=date,
+            memo=details.get("Description"),
+            amount=withdrawal or deposit,
+        )
+        line.check_no = details.get("CheckNumber")
+        line.trntype = POSTED_TRANSACTION_TYPES[details["Type"]]
+
+        line.assert_valid()
+        self.statement.lines.append(line)
 
 
 class IdGenerator:
