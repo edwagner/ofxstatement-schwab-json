@@ -10,6 +10,7 @@ black = "*"
 exceptiongroup = "*"
 build = "*"
 tomli = "*"
+pytest-cov = "*"
 
 [packages]
 ofxstatement = {ref = "master", git = "https://github.com/kedder/ofxstatement.git"}
