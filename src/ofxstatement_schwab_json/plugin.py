@@ -78,14 +78,11 @@ class SchwabJsonParser(AbstractStatementParser):
             elif action == "Advisor Fee":
                 self.add_bank_line(id, date, "XFER", tran)
             elif len(tran["Symbol"]) > 0 and (
-                action == "Journaled Shares"
+                action == "Journal"
+                or action == "Journaled Shares"
                 or action == "Spin-off"
                 or action == "Stock Split"
                 or action == "Security Transfer"
-            ):
-                self.add_transfer_line(id, date, tran)
-            elif len(tran["Symbol"]) > 0 and (
-                action == "Journal"
             ):
                 self.add_transfer_line(id, date, tran)
             elif len(tran["Symbol"]) == 0:
