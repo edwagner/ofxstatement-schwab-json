@@ -21,6 +21,7 @@ POSTED_TRANSACTION_TYPES = {
     "TRANSFER": "XFER",
 }
 
+
 class SchwabJsonPlugin(Plugin):
     """Parses Schwab JSON export of investment transactions"""
 
@@ -48,13 +49,15 @@ class SchwabJsonParser(AbstractStatementParser):
             loaded = json.load(f)
             posted_transactions = reversed(
                 # Banking / Checking accounts
-                loaded.get("PostedTransactions", []))
+                loaded.get("PostedTransactions", [])
+            )
             brokerage_transactions = reversed(
                 # Brokerage accounts
-                loaded.get("BrokerageTransactions", []))
+                loaded.get("BrokerageTransactions", [])
+            )
             self.import_lines(
-                posted_transactions = posted_transactions,
-                brokerage_transactions = brokerage_transactions,
+                posted_transactions=posted_transactions,
+                brokerage_transactions=brokerage_transactions,
             )
             return self.statement
 
@@ -232,13 +235,17 @@ class SchwabJsonParser(AbstractStatementParser):
         self.statement.invest_lines.append(line)
 
     def add_statement_line(self, id, date, details):
-        withdrawal = Decimal(
-            f'-{re.sub("[$,]", "", details["Withdrawal"])}'
-        ) if details.get("Withdrawal") else None
+        withdrawal = (
+            Decimal(f'-{re.sub("[$,]", "", details["Withdrawal"])}')
+            if details.get("Withdrawal")
+            else None
+        )
 
-        deposit = Decimal(
-            f'{re.sub("[$,]", "", details["Deposit"])}'
-        ) if details.get("Deposit") else None
+        deposit = (
+            Decimal(f'{re.sub("[$,]", "", details["Deposit"])}')
+            if details.get("Deposit")
+            else None
+        )
 
         line = StatementLine(
             id=id,
