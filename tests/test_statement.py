@@ -23,10 +23,12 @@ def statement() -> ofxstatement.statement.Statement:
 
 def test_parsing(statement):
     assert statement is not None
+    assert len(statement.lines) == 3
     assert len(statement.invest_lines) == 29
 
 
 def test_ids(statement):
+    assert statement.lines[0].id == "20250529-1"
     assert statement.invest_lines[0].id == "20230922-1"
     assert statement.invest_lines[1].id == "20230922-2"
 
@@ -42,7 +44,7 @@ def test_transfer_cash(statement):
 
 
 def test_transfer_cash_bank(statement):
-    line = next(x for x in statement.invest_lines if x.id == "20250529-1")
+    line = next(x for x in statement.invest_lines if x.id == "20250529-2")
     assert line.trntype == "INVBANKTRAN"
     assert line.trntype_detailed == "XFER"
     assert line.amount == -100
@@ -270,6 +272,7 @@ def test_adr_mgmt_fee(statement):
     assert line.security_id is None
     assert line.unit_price is None
 
+
 def test_nra_tax_adj(statement):
     line = next(x for x in statement.invest_lines if x.id == "20250515-1")
     assert line.trntype == "INVEXPENSE"
@@ -288,3 +291,24 @@ def test_advisor_fee(statement):
     assert line.amount == Decimal("-419.08")
     assert line.security_id is None
     assert line.unit_price is None
+
+
+def test_posted_atm_withdrawal(statement):
+    line = next(x for x in statement.lines if x.id == "20250607-1")
+    assert line.memo == "CHASE MAIN ST ANYTOWN"
+    assert line.trntype == "ATM"
+    assert line.amount == Decimal("-23.50")
+
+
+def test_posted_interest(statement):
+    line = next(x for x in statement.lines if x.id == "20250530-1")
+    assert line.memo == "Interest Paid"
+    assert line.trntype == "INT"
+    assert line.amount == Decimal("0.03")
+
+
+def test_posted_transfer(statement):
+    line = next(x for x in statement.lines if x.id == "20250529-1")
+    assert line.memo == "Funds Transfer from Brokerage"
+    assert line.trntype == "XFER"
+    assert line.amount == Decimal("100")
