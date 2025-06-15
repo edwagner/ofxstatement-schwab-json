@@ -23,10 +23,12 @@ def statement() -> ofxstatement.statement.Statement:
 
 def test_parsing(statement):
     assert statement is not None
+    assert len(statement.lines) == 3
     assert len(statement.invest_lines) == 24
 
 
 def test_ids(statement):
+    assert statement.lines[0].id == "20250529-1"
     assert statement.invest_lines[0].id == "20230922-1"
     assert statement.invest_lines[1].id == "20230922-2"
 
@@ -238,3 +240,24 @@ def test_nra_tax_adj(statement):
     assert line.amount == Decimal("-0.29")
     assert line.security_id == "AAPL"
     assert line.unit_price is None
+
+
+def test_posted_atm_withdrawal(statement):
+    line = next(x for x in statement.lines if x.id == "20250607-1")
+    assert line.memo == "CHASE MAIN ST ANYTOWN"
+    assert line.trntype == "ATM"
+    assert line.amount == Decimal("-23.50")
+
+
+def test_posted_interest(statement):
+    line = next(x for x in statement.lines if x.id == "20250530-1")
+    assert line.memo == "Interest Paid"
+    assert line.trntype == "INT"
+    assert line.amount == Decimal("0.03")
+
+
+def test_posted_transfer(statement):
+    line = next(x for x in statement.lines if x.id == "20250529-1")
+    assert line.memo == "Funds Transfer from Brokerage"
+    assert line.trntype == "XFER"
+    assert line.amount == Decimal("100")
