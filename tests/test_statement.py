@@ -232,6 +232,7 @@ def test_adr_mgmt_fee(statement):
     assert line.security_id is None
     assert line.unit_price is None
 
+
 def test_nra_tax_adj(statement):
     line = next(x for x in statement.invest_lines if x.id == "20250515-1")
     assert line.trntype == "INVEXPENSE"
