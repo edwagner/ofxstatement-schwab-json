@@ -286,7 +286,7 @@ def test_nra_tax_adj(statement):
 def test_advisor_fee(statement):
     line = next(x for x in statement.invest_lines if x.id == "20250610-1")
     assert line.trntype == "INVBANKTRAN"
-    assert line.trntype_detailed == "XFER"
+    assert line.trntype_detailed == "SRVCHG"
     assert line.units is None
     assert line.amount == Decimal("-419.08")
     assert line.security_id is None
