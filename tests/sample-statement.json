@@ -5,6 +5,15 @@
   "PostedTransactions": [
     {
       "CheckNumber": null,
+      "Description": "ZELLE TO JOHN DOE",
+      "Date": "06/15/2025",
+      "RunningBalance": "$700.00",
+      "Withdrawal": "$100.00",
+      "Deposit": "",
+      "Type": "DEBIT"
+    },
+    {
+      "CheckNumber": null,
       "Description": "CHASE MAIN ST ANYTOWN",
       "Date": "06/07/2025",
       "RunningBalance": "$929.53",
