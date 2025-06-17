@@ -6,7 +6,7 @@ test:
 
 .PHONY: coverage
 coverage:
-	pytest --cov src/ofxstatement_schwab_json
+	pytest --cov src/ofxstatement_schwab_json --cov-report term --cov-report html
 
 .PHONY: black
 black:
