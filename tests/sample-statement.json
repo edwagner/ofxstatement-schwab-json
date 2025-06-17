@@ -5,6 +5,33 @@
   "PostedTransactions": [
     {
       "CheckNumber": null,
+      "Description": "TRIAL ACCTVERIFY 250615",
+      "Date": "06/16/2025",
+      "RunningBalance": "$549.87",
+      "Withdrawal": "$0.46",
+      "Deposit": "",
+      "Type": "ACH"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "TRIAL ACCTVERIFY 250615",
+      "Date": "06/16/2025",
+      "RunningBalance": "$550.33",
+      "Withdrawal": "",
+      "Deposit": "$0.25",
+      "Type": "ACH"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "ZELLE TO JOHN DOE",
+      "Date": "06/15/2025",
+      "RunningBalance": "$700.00",
+      "Withdrawal": "$100.00",
+      "Deposit": "",
+      "Type": "DEBIT"
+    },
+    {
+      "CheckNumber": null,
       "Description": "CHASE MAIN ST ANYTOWN",
       "Date": "06/07/2025",
       "RunningBalance": "$929.53",
@@ -32,6 +59,56 @@
     }
   ],
   "BrokerageTransactions": [
+    {
+      "Date": "06/02/2025",
+      "Action": "Journal",
+      "Symbol": "SNSXX",
+      "Description": "SCHWAB US TREASURY MONEY INVESTOR",
+      "Quantity": "103.26",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": ""
+    },
+    {
+      "Date": "06/02/2025",
+      "Action": "Journal",
+      "Symbol": "SNSXX",
+      "Description": "SCHWAB US TREASURY MONEY INVESTOR",
+      "Quantity": "-103.26",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": ""
+    },
+    {
+      "Date": "05/29/2025",
+      "Action": "Bank Transfer",
+      "Symbol": "",
+      "Description": "JOURNAL FUNDS TO INVESTOR CHECKING",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$100.00"
+    },
+    {
+      "Date": "03/21/2025",
+      "Action": "Special Dividend",
+      "Symbol": "MTUM",
+      "Description": "ISHARES MSCI USA MOMNTUMFCT ETF",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$19.59"
+    },
+    {
+      "Date": "06/10/2025",
+      "Action": "Advisor Fee",
+      "Symbol": "",
+      "Description": "MGMTFEE TO ADVISOR",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$419.08"
+    },
     {
       "Date": "05/15/2025",
       "Action": "NRA Tax Adj",

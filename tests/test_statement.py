@@ -23,8 +23,8 @@ def statement() -> ofxstatement.statement.Statement:
 
 def test_parsing(statement):
     assert statement is not None
-    assert len(statement.lines) == 3
-    assert len(statement.invest_lines) == 24
+    assert len(statement.lines) == 6
+    assert len(statement.invest_lines) == 29
 
 
 def test_ids(statement):
@@ -38,6 +38,16 @@ def test_transfer_cash(statement):
     assert line.trntype == "INVBANKTRAN"
     assert line.trntype_detailed == "XFER"
     assert line.amount == -1500
+    assert line.security_id is None
+    assert line.units is None
+    assert line.unit_price is None
+
+
+def test_transfer_cash_bank(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20250529-2")
+    assert line.trntype == "INVBANKTRAN"
+    assert line.trntype_detailed == "XFER"
+    assert line.amount == -100
     assert line.security_id is None
     assert line.units is None
     assert line.unit_price is None
@@ -71,6 +81,26 @@ def test_journal_security(statement):
     assert line.security_id == "SWVXX"
     assert line.unit_price == 1
     assert line.amount == 0
+
+
+def test_journal_security2(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20250602-1")
+    assert line.trntype == "TRANSFER"
+    assert line.trntype_detailed is None
+    assert line.units == Decimal("-103.26")
+    assert line.security_id == "SNSXX"
+    assert line.unit_price == Decimal("0")
+    assert line.amount == Decimal("0")
+
+
+def test_journal_security3(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20250602-2")
+    assert line.trntype == "TRANSFER"
+    assert line.trntype_detailed is None
+    assert line.units == Decimal("103.26")
+    assert line.security_id == "SNSXX"
+    assert line.unit_price == Decimal("0")
+    assert line.amount == Decimal("0")
 
 
 def test_security_transfer(statement):
@@ -140,6 +170,16 @@ def test_dividend4(statement):
     assert line.units is None
     assert line.amount == Decimal("622.50")
     assert line.security_id == "HASI"
+    assert line.unit_price is None
+
+
+def test_dividend5_special_dividend(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20250321-1")
+    assert line.trntype == "INCOME"
+    assert line.trntype_detailed == "DIV"
+    assert line.units is None
+    assert line.amount == Decimal("19.59")
+    assert line.security_id == "MTUM"
     assert line.unit_price is None
 
 
@@ -243,6 +283,16 @@ def test_nra_tax_adj(statement):
     assert line.unit_price is None
 
 
+def test_advisor_fee(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20250610-1")
+    assert line.trntype == "INVBANKTRAN"
+    assert line.trntype_detailed == "SRVCHG"
+    assert line.units is None
+    assert line.amount == Decimal("-419.08")
+    assert line.security_id is None
+    assert line.unit_price is None
+
+
 def test_posted_atm_withdrawal(statement):
     line = next(x for x in statement.lines if x.id == "20250607-1")
     assert line.memo == "CHASE MAIN ST ANYTOWN"
@@ -262,3 +312,24 @@ def test_posted_transfer(statement):
     assert line.memo == "Funds Transfer from Brokerage"
     assert line.trntype == "XFER"
     assert line.amount == Decimal("100")
+
+
+def test_posted_debit(statement):
+    line = next(x for x in statement.lines if x.id == "20250615-1")
+    assert line.memo == "ZELLE TO JOHN DOE"
+    assert line.trntype == "DEBIT"
+    assert line.amount == Decimal("-100")
+
+
+def test_posted_ach_deposit(statement):
+    line = next(x for x in statement.lines if x.id == "20250616-1")
+    assert line.memo == "TRIAL ACCTVERIFY 250615"
+    assert line.trntype == "CREDIT"
+    assert line.amount == Decimal("0.25")
+
+
+def test_posted_ach_withdrawal(statement):
+    line = next(x for x in statement.lines if x.id == "20250616-2")
+    assert line.memo == "TRIAL ACCTVERIFY 250615"
+    assert line.trntype == "DEBIT"
+    assert line.amount == Decimal("-0.46")

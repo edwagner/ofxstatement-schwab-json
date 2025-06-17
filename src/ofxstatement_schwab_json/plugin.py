@@ -17,6 +17,7 @@ import json
 POSTED_TRANSACTION_TYPES = {
     # Map Schwab PostedTransactions types to ofxstatement TRANSACTION_TYPES
     "ATM": "ATM",
+    "DEBIT": "DEBIT",
     "INTADJUST": "INT",
     "TRANSFER": "XFER",
 }
@@ -83,6 +84,7 @@ class SchwabJsonParser(AbstractStatementParser):
                 or action == "Pr Yr Non-Qual Div"
                 or action == "Qual Div Reinvest"
                 or action == "Reinvest Dividend"
+                or action == "Special Dividend"
                 or action == "Div Adjustment"
             ):
                 self.add_income_line(id, date, "DIV", tran)
@@ -96,10 +98,11 @@ class SchwabJsonParser(AbstractStatementParser):
                 self.add_invexpense_line(id, date, tran)
             elif action == "Buy" or action == "Reinvest Shares":
                 self.add_buy_line(id, date, tran)
-            elif action == "ADR Mgmt Fee":
+            elif action == "ADR Mgmt Fee" or action == "Advisor Fee":
                 self.add_bank_line(id, date, "SRVCHG", tran)
             elif len(tran["Symbol"]) > 0 and (
-                action == "Journaled Shares"
+                action == "Journal"
+                or action == "Journaled Shares"
                 or action == "Spin-off"
                 or action == "Stock Split"
                 or action == "Security Transfer"
@@ -114,6 +117,7 @@ class SchwabJsonParser(AbstractStatementParser):
                     self.add_bank_line(id, date, "INT", tran)
                 elif (
                     action == "MoneyLink Transfer"
+                    or action == "Bank Transfer"
                     or action == "Internal Transfer"
                     or action == "Journal"
                     or action == "Journaled Shares"
@@ -254,7 +258,13 @@ class SchwabJsonParser(AbstractStatementParser):
             amount=withdrawal or deposit,
         )
         line.check_no = details.get("CheckNumber")
-        line.trntype = POSTED_TRANSACTION_TYPES[details["Type"]]
+        if details["Type"] == "ACH":
+            if withdrawal:
+                line.trntype = "DEBIT"
+            else:
+                line.trntype = "CREDIT"
+        else:
+            line.trntype = POSTED_TRANSACTION_TYPES[details["Type"]]
 
         line.assert_valid()
         self.statement.lines.append(line)
