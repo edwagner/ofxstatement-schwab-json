@@ -5,6 +5,24 @@
   "PostedTransactions": [
     {
       "CheckNumber": null,
+      "Description": "TRIAL ACCTVERIFY 250615",
+      "Date": "06/16/2025",
+      "RunningBalance": "$549.87",
+      "Withdrawal": "$0.46",
+      "Deposit": "",
+      "Type": "ACH"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "TRIAL ACCTVERIFY 250615",
+      "Date": "06/16/2025",
+      "RunningBalance": "$550.33",
+      "Withdrawal": "",
+      "Deposit": "$0.25",
+      "Type": "ACH"
+    },
+    {
+      "CheckNumber": null,
       "Description": "ZELLE TO JOHN DOE",
       "Date": "06/15/2025",
       "RunningBalance": "$700.00",

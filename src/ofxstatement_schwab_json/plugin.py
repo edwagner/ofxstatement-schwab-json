@@ -258,7 +258,13 @@ class SchwabJsonParser(AbstractStatementParser):
             amount=withdrawal or deposit,
         )
         line.check_no = details.get("CheckNumber")
-        line.trntype = POSTED_TRANSACTION_TYPES[details["Type"]]
+        if details["Type"] == "ACH":
+            if withdrawal:
+                line.trntype = "DEBIT"
+            else:
+                line.trntype = "CREDIT"
+        else:
+            line.trntype = POSTED_TRANSACTION_TYPES[details["Type"]]
 
         line.assert_valid()
         self.statement.lines.append(line)
