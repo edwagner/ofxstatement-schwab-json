@@ -47,15 +47,16 @@ Use `pipenv` to make a clean development environment.
 ```
 $ cd ofxstatement-schwab-json
 $ pipenv sync --dev
-$ pipenv shell
-$ pytest
-$ pip3 install mypy black
-$ mypy src
-$ black src
 ```
 
 This will download all the dependencies and install them into your virtual
-environment. After this, you should be able to do:
+environment. To enter the development environment:
+
+```
+$ pipenv shell
+```
+
+Inside the `pipenv` shell:
 
 ```
 $ ofxstatement list-plugins
@@ -64,9 +65,25 @@ The following plugins are available:
   schwab_json      Parses Schwab JSON export of investment transactions
 ```
 
+Alternatively, single commands can be run inside the `pipenv` environment
+directly from the main shell:
+
+```
+$ pipenv run ofxstatement list-plugins
+```
+
 ### Upgrading Dependencies
 
 After running `pipenv shell`, run `pipenv update` to update everything.
+
+### Testing
+
+Run the following command to run the test suite, type checks, and text
+formatting (see [Makefile](Makefile) for details):
+
+```
+$ pipenv run make all
+```
 
 ## Packaging
 
