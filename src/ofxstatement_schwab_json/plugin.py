@@ -20,6 +20,7 @@ POSTED_TRANSACTION_TYPES = {
     "DEBIT": "DEBIT",
     "INTADJUST": "INT",
     "TRANSFER": "XFER",
+    "VISA": "POS",
 }
 
 
