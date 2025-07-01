@@ -17,9 +17,11 @@ import json
 POSTED_TRANSACTION_TYPES = {
     # Map Schwab PostedTransactions types to ofxstatement TRANSACTION_TYPES
     "ATM": "ATM",
+    "ATMREBATE": "CREDIT",
     "DEBIT": "DEBIT",
     "INTADJUST": "INT",
     "TRANSFER": "XFER",
+    "VISA": "POS",
 }
 
 
