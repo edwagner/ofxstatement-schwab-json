@@ -23,7 +23,7 @@ def statement() -> ofxstatement.statement.Statement:
 
 def test_parsing(statement):
     assert statement is not None
-    assert len(statement.lines) == 7
+    assert len(statement.lines) == 8
     assert len(statement.invest_lines) == 29
 
 
@@ -340,3 +340,10 @@ def test_posted_visa_debit(statement):
     assert line.memo == "ABC COMPANY LIMITED"
     assert line.trntype == "POS"
     assert line.amount == Decimal("-30.79")
+
+
+def test_posted_atmrebate(statement):
+    line = next(x for x in statement.lines if x.id == "20250630-1")
+    assert line.memo == "ATM Fee Rebate"
+    assert line.trntype == "CREDIT"
+    assert line.amount == Decimal("14.50")
