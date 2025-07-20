@@ -5,6 +5,15 @@
   "PostedTransactions": [
     {
       "CheckNumber": null,
+      "Description": "Deposit Mobile Banking",
+      "Date": "07/12/2025",
+      "RunningBalance": "$668.19",
+      "Withdrawal": "",
+      "Deposit": "$8.00",
+      "Type": "DEPOSIT"
+    },
+    {
+      "CheckNumber": null,
       "Description": "ATM Fee Rebate",
       "Date": "06/30/2025",
       "RunningBalance": "$486.89",

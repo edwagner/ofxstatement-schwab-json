@@ -19,6 +19,7 @@ POSTED_TRANSACTION_TYPES = {
     "ATM": "ATM",
     "ATMREBATE": "CREDIT",
     "DEBIT": "DEBIT",
+    "DEPOSIT": "DEP",
     "INTADJUST": "INT",
     "TRANSFER": "XFER",
     "VISA": "POS",
