@@ -85,6 +85,7 @@ class SchwabJsonParser(AbstractStatementParser):
                 or action == "Pr Yr Cash Div"
                 or action == "Pr Yr Non Qual Div"
                 or action == "Pr Yr Non-Qual Div"
+                or action == "Pr Yr Special Div"
                 or action == "Qual Div Reinvest"
                 or action == "Reinvest Dividend"
                 or action == "Special Dividend"

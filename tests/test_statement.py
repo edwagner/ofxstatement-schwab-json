@@ -24,7 +24,7 @@ def statement() -> ofxstatement.statement.Statement:
 def test_parsing(statement):
     assert statement is not None
     assert len(statement.lines) == 9
-    assert len(statement.invest_lines) == 29
+    assert len(statement.invest_lines) == 30
 
 
 def test_ids(statement):
@@ -180,6 +180,16 @@ def test_dividend5_special_dividend(statement):
     assert line.units is None
     assert line.amount == Decimal("19.59")
     assert line.security_id == "MTUM"
+    assert line.unit_price is None
+
+
+def test_dividend6_prior_year_special_dividend(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20240116-2")
+    assert line.trntype == "INCOME"
+    assert line.trntype_detailed == "DIV"
+    assert line.units is None
+    assert line.amount == Decimal("42.41")
+    assert line.security_id == "QQQ"
     assert line.unit_price is None
 
 
