@@ -308,6 +308,18 @@
     },
     {
       "Date": "01/16/2024 as of 01/15/2024",
+      "Action": "Pr Yr Special Div",
+      "Symbol": "QQQ",
+      "Description": "INVSC QQQ TRUST SRS 1 ETF IV",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$42.41",
+      "ItemIssueId": "48644470",
+      "AcctgRuleCd": "1"
+    },
+    {
+      "Date": "01/16/2024 as of 01/15/2024",
       "Action": "Bank Interest",
       "Symbol": "",
       "Description": "BANK INT …1325-013554 TD BANK USA NA",
