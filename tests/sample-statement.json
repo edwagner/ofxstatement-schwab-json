@@ -4,6 +4,15 @@
   "TotalTransactionsAmount": "$526.12",
   "PostedTransactions": [
     {
+      "CheckNumber": "101",
+      "Description": "Check Paid #101",
+      "Date": "10/01/2025",
+      "RunningBalance": "$4,522.22",
+      "Withdrawal": "$870.80",
+      "Deposit": "",
+      "Type": "CHECK"
+    },
+    {
       "CheckNumber": null,
       "Description": "Deposit Mobile Banking",
       "Date": "07/12/2025",
