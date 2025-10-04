@@ -112,12 +112,18 @@ class SchwabJsonParser(AbstractStatementParser):
             ):
                 self.add_transfer_line(id, date, tran)
             elif len(tran["Symbol"]) == 0:
-                if (
+                if action == "Wire Sent":
+                    self.add_bank_line(id, date, "DEBIT", tran)
+                elif (
                     action == "Bank Interest"
                     or action == "Bond Interest"
                     or action == "Credit Interest"
                 ):
                     self.add_bank_line(id, date, "INT", tran)
+                elif action == "Misc Cash Entry":
+                    self.add_bank_line(id, date, "OTHER", tran)
+                elif action == "Service Fee" or action == "Advisor Fee":
+                    self.add_bank_line(id, date, "SRVCHG", tran)
                 elif (
                     action == "MoneyLink Transfer"
                     or action == "Bank Transfer"
@@ -127,12 +133,6 @@ class SchwabJsonParser(AbstractStatementParser):
                     or action == "Security Transfer"
                 ):
                     self.add_bank_line(id, date, "XFER", tran)
-                elif action == "Wire Sent":
-                    self.add_bank_line(id, date, "DEBIT", tran)
-                elif action == "Service Fee" or action == "Advisor Fee":
-                    self.add_bank_line(id, date, "SRVCHG", tran)
-                elif action == "Misc Cash Entry":
-                    self.add_bank_line(id, date, "OTHER", tran)
                 else:
                     raise Exception(f'Unrecognized bank action: "{action}"')
             elif action == "ADR Mgmt Fee":
@@ -231,6 +231,7 @@ class SchwabJsonParser(AbstractStatementParser):
         line.assert_valid()
         self.statement.invest_lines.append(line)
 
+    # action_type is defined in section 11.4.4.3
     def add_bank_line(self, id, date, action_type, details):
         line = InvestStatementLine(
             id=id,
