@@ -103,8 +103,6 @@ class SchwabJsonParser(AbstractStatementParser):
                 self.add_invexpense_line(id, date, tran)
             elif action == "Buy" or action == "Reinvest Shares":
                 self.add_buy_line(id, date, tran)
-            elif action == "ADR Mgmt Fee" or action == "Advisor Fee":
-                self.add_bank_line(id, date, "SRVCHG", tran)
             elif len(tran["Symbol"]) > 0 and (
                 action == "Journal"
                 or action == "Journaled Shares"
@@ -131,12 +129,14 @@ class SchwabJsonParser(AbstractStatementParser):
                     self.add_bank_line(id, date, "XFER", tran)
                 elif action == "Wire Sent":
                     self.add_bank_line(id, date, "DEBIT", tran)
-                elif action == "Service Fee":
+                elif action == "Service Fee" or action == "Advisor Fee":
                     self.add_bank_line(id, date, "SRVCHG", tran)
                 elif action == "Misc Cash Entry":
                     self.add_bank_line(id, date, "OTHER", tran)
                 else:
                     raise Exception(f'Unrecognized bank action: "{action}"')
+            elif action == "ADR Mgmt Fee":
+                self.add_bank_line(id, date, "SRVCHG", tran)
             elif action == "Cash In Lieu":
                 self.add_bank_line(id, date, "CREDIT", tran)
             else:
