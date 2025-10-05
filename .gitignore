@@ -10,4 +10,5 @@ eggs
 .project
 .pydevproject
 *.sublime*
+.vscode
 .DS_Store

@@ -96,3 +96,96 @@ $ python -m build
 * [OFX specification](https://financialdataexchange.org/common/Uploaded%20files/OFX%20files/OFX%20Banking%20Specification%20v2.3.pdf)
 * [GnuCash OFX code](https://github.com/Gnucash/gnucash/blob/stable/gnucash/import-export/ofx/gnc-ofx-import.cppx)
 * [libofx](https://github.com/libofx/libofx)
+
+## OFX Structure
+
+For easy reference, here is the structure of the most relevant parts of the OFX statement.
+This is not complete, but should give you an idea of what gets produced.
+The comments point out the corresponding sections in the [OFX specification v2.3](https://financialdataexchange.org/common/Uploaded%20files/OFX%20files/OFX%20Banking%20Specification%20v2.3.pdf).
+
+```xml
+<OFX>
+  <BANKMSGSRSV1>
+    <STMTTRNRS>
+      <STMTRS> <!-- 11.4.2.2 -->
+        <BANKTRANLIST>
+          <STMTTRN> <!-- 11.4.4.1 -->
+            <TRNTYPE>CHECK</TRNTYPE> <!-- 11.4.4.3 -->
+            <DTPOSTED>20251001</DTPOSTED>
+            <TRNAMT>-870.80</TRNAMT>
+            <FITID>20251001-1</FITID>
+            <CHECKNUM>101</CHECKNUM>
+            <MEMO>Check Paid #101</MEMO>
+          </STMTTRN>
+        </BANKTRANLIST>
+      </STMTRS>
+    </STMTTRNRS>
+  </BANKMSGSRSV1>
+  <SECLISTMSGSRSV1>
+    <SECLIST> <!-- 13.8.4 -->
+      <STOCKINFO>
+        <SECINFO> <!-- 13.8.5.1 -->
+          <SECID>
+            <UNIQUEID>AAPL</UNIQUEID>
+            <UNIQUEIDTYPE>TICKER</UNIQUEIDTYPE>
+          </SECID>
+          <SECNAME>AAPL</SECNAME>
+          <TICKER>AAPL</TICKER>
+        </SECINFO>
+      </STOCKINFO>
+    </SECLIST>
+  </SECLISTMSGSRSV1>
+  <INVSTMTMSGSRSV1>
+    <INVSTMTTRNRS> <!-- 13.9.2.1 -->
+      <INVSTMTRS> <!-- 13.9.2.2 -->
+        <INVTRANLIST>
+          <INCOME> <!-- 13.9.2.4.4 -->
+            <INCOMETYPE>DIV</INCOMETYPE>
+            <INVTRAN> <!-- 13.9.2.4.1 -->
+              <FITID>20250815-1</FITID>
+              <DTTRADE>20250815</DTTRADE>
+              <MEMO>Non-Qualified Div Apple, Inc.</MEMO>
+            </INVTRAN>
+            <SECID>
+              <UNIQUEID>AAPL</UNIQUEID>
+              <UNIQUEIDTYPE>TICKER</UNIQUEIDTYPE>
+            </SECID>
+            <SUBACCTSEC>OTHER</SUBACCTSEC>
+            <SUBACCTFUND>OTHER</SUBACCTFUND>
+            <TOTAL>100.00</TOTAL>
+          </INCOME>
+          <SELLSTOCK> <!-- 13.9.2.4.4 -->
+            <SELLTYPE>SELL</SELLTYPE>
+            <INVSELL> <!-- 13.9.2.4.3 -->
+              <INVTRAN>
+                <FITID>20250908-1</FITID>
+                <DTTRADE>20250908</DTTRADE>
+                <MEMO>Sell Apple, Inc.</MEMO>
+              </INVTRAN>
+              <SECID>
+                <UNIQUEID>AAPL</UNIQUEID>
+                <UNIQUEIDTYPE>TICKER</UNIQUEIDTYPE>
+              </SECID>
+              <SUBACCTSEC>OTHER</SUBACCTSEC>
+              <SUBACCTFUND>OTHER</SUBACCTFUND>
+              <UNITPRICE>257.90000</UNITPRICE>
+              <UNITS>-1.00000</UNITS>
+              <TOTAL>257.90</TOTAL>
+            </INVSELL>
+          </SELLSTOCK>
+          <INVBANKTRAN> <!-- 13.9.2.3, contents are similar to <BANKTRANLIST> above -->
+            <STMTTRN> <!-- 11.4.4.1 -->
+              <TRNTYPE>INT</TRNTYPE> <!-- 11.4.4.3 -->
+              <DTPOSTED>20250929</DTPOSTED>
+              <TRNAMT>0.16</TRNAMT>
+              <FITID>20250929-1</FITID>
+              <MEMO>Credit Interest SCHWAB1 INT 08/28-09/28</MEMO>
+            </STMTTRN>
+            <SUBACCTFUND>OTHER</SUBACCTFUND>
+          </INVBANKTRAN>
+        </INVTRANLIST>
+      </INVSTMTRS>
+    </INVSTMTTRNRS>
+  </INVSTMTMSGSRSV1>
+</OFX>
+```
