@@ -196,6 +196,30 @@
       "Amount": ""
     },
     {
+      "Date": "04/04/2024",
+      "Action": "Funds Received",
+      "Symbol": "",
+      "Description": "FUNDS RECEIVED",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$5,555.00",
+      "ItemIssueId": "0",
+      "AcctgRuleCd": "1"
+    },
+    {
+      "Date": "04/03/2024",
+      "Action": "MoneyLink Deposit",
+      "Symbol": "",
+      "Description": "SENDING BANK ...555",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$1000.00",
+      "ItemIssueId": "0",
+      "AcctgRuleCd": "1"
+    },
+    {
       "Date": "04/02/2024 as of 04/01/2024",
       "Action": "Cash In Lieu",
       "Symbol": "SOLV",
@@ -328,7 +352,32 @@
       "AcctgRuleCd": "1"
     },
     {
-      "Date": "01/16/2024 as of 01/15/2024",
+      "Date": "01/15/2024",
+      "Action": "Pr Yr Div Reinvest",
+      "Symbol": "SPY",
+      "Description": "SPDR S&P ...500 ETF IV",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$55.55",
+      "ItemIssueId": "1281357633",
+      "AcctgRuleCd": "1"
+    },
+    {
+      "Date": "01/14/2024",
+      "Action": "Special Qual Div",
+      "Symbol": "F",
+      "Description": "FORD MTR CO DEL",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$1.00",
+      "ItemIssueId": "993280518",
+      "AcctgRuleCd": "1"
+    },
+
+    {
+      "Date": "01/10/2024 as of 01/09/2024",
       "Action": "Bank Interest",
       "Symbol": "",
       "Description": "BANK INT …1325-013554 TD BANK USA NA",
@@ -346,6 +395,18 @@
       "Quantity": "",
       "Fees & Comm": "",
       "Amount": "$0.01"
+    },
+    {
+      "Date": "12/13/2023 as of 12/11/2023",
+      "Action": "Returned Check",
+      "Symbol": "",
+      "Description": "Returned Deposit - Unable to Locate Acct",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$555.00",
+      "ItemIssueId": "0",
+      "AcctgRuleCd": "1"
     },
     {
       "Date": "12/12/2023",
@@ -376,6 +437,18 @@
       "Quantity": "",
       "Fees & Comm": "",
       "Amount": "-$15.00"
+    },
+    {
+      "Date": "12/11/2023",
+      "Action": "Interest Adj",
+      "Symbol": "",
+      "Description": "BANK INT 2023-12-01 to 2023-12-10",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$0.05",
+      "ItemIssueId": "0",
+      "AcctgRuleCd": "1"
     },
     {
       "Date": "09/22/2023",
