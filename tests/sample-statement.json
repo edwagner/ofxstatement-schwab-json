@@ -4,6 +4,15 @@
   "TotalTransactionsAmount": "$526.12",
   "PostedTransactions": [
     {
+      "CheckNumber": null,
+      "Description": "Outgoing Wire",
+      "Date": "10/09/2025",
+      "RunningBalance": "$5,727.13",
+      "Withdrawal": "$400.00",
+      "Deposit": "",
+      "Type": "WIRE"
+    },
+    {
       "CheckNumber": "101",
       "Description": "Check Paid #101",
       "Date": "10/01/2025",

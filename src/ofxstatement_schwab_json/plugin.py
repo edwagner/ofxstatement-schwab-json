@@ -24,6 +24,7 @@ POSTED_TRANSACTION_TYPES = {
     "INTADJUST": "INT",
     "TRANSFER": "XFER",
     "VISA": "POS",
+    "WIRE": "XFER",
 }
 
 
