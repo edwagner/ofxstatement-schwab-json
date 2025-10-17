@@ -23,7 +23,7 @@ def statement() -> ofxstatement.statement.Statement:
 
 def test_parsing(statement):
     assert statement is not None
-    assert len(statement.lines) == 10
+    assert len(statement.lines) == 12
     assert len(statement.invest_lines) == 36
 
 
@@ -431,3 +431,17 @@ def test_posted_check(statement):
     assert line.memo == "Check Paid #101"
     assert line.trntype == "CHECK"
     assert line.amount == Decimal("-870.80")
+
+
+def test_posted_outgoing_wire(statement):
+    line = next(x for x in statement.lines if x.id == "20251009-1")
+    assert line.memo == "Outgoing Wire"
+    assert line.trntype == "DEBIT"
+    assert line.amount == Decimal("-400.00")
+
+
+def test_posted_incoming_wire(statement):
+    line = next(x for x in statement.lines if x.id == "20251010-1")
+    assert line.memo == "Incoming Wire"
+    assert line.trntype == "CREDIT"
+    assert line.amount == Decimal("399.00")

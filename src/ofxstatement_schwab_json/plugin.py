@@ -268,7 +268,7 @@ class SchwabJsonParser(AbstractStatementParser):
             amount=withdrawal or deposit,
         )
         line.check_no = details.get("CheckNumber")
-        if details["Type"] == "ACH":
+        if details["Type"] in ("ACH", "WIRE"):
             if withdrawal:
                 line.trntype = "DEBIT"
             else:
