@@ -24,7 +24,7 @@ def statement() -> ofxstatement.statement.Statement:
 def test_parsing(statement):
     assert statement is not None
     assert len(statement.lines) == 12
-    assert len(statement.invest_lines) == 36
+    assert len(statement.invest_lines) == 38
 
 
 def test_ids(statement):
@@ -361,6 +361,22 @@ def test_advisor_fee(statement):
     assert line.amount == Decimal("-419.08")
     assert line.security_id is None
     assert line.unit_price is None
+
+
+def test_short_term_cap_gain_reinvestment(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20251211-1")
+    assert line.trntype == "INCOME"
+    assert line.trntype_detailed == "CGSHORT"
+    assert line.security_id == "FXAIX"
+    assert line.amount == Decimal("39.45")
+
+
+def test_long_term_cap_gain_reinvestment(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20251210-1")
+    assert line.trntype == "INCOME"
+    assert line.trntype_detailed == "CGLONG"
+    assert line.security_id == "FXNAX"
+    assert line.amount == Decimal("61.44")
 
 
 def test_posted_atm_withdrawal(statement):

@@ -95,9 +95,15 @@ class SchwabJsonParser(AbstractStatementParser):
                 or action == "Special Qual Div"
             ):
                 self.add_income_line(id, date, "DIV", tran)
-            elif action == "Long Term Cap Gain":
+            elif (
+                action == "Long Term Cap Gain"
+                or action == "Long Term Cap Gain Reinvest"
+            ):
                 self.add_income_line(id, date, "CGLONG", tran)
-            elif action == "Short Term Cap Gain":
+            elif (
+                action == "Short Term Cap Gain"
+                or action == "Short Term Cap Gain Reinvest"
+            ):
                 self.add_income_line(id, date, "CGSHORT", tran)
             elif action == "Bank Interest" and len(tran["Symbol"]) > 0:
                 self.add_income_line(id, date, "INTEREST", tran)

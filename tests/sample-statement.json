@@ -114,6 +114,30 @@
   ],
   "BrokerageTransactions": [
     {
+      "Date": "12/11/2025",
+      "Action": "Short Term Cap Gain Reinvest",
+      "Symbol": "FXAIX",
+      "Description": "FIDELITY 500 INDEX FUND",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$39.45",
+      "ItemIssueId": "278422687",
+      "AcctgRuleCd": "1"
+    },
+    {
+      "Date": "12/10/2025",
+      "Action": "Long Term Cap Gain Reinvest",
+      "Symbol": "FXNAX",
+      "Description": "FIDELITY U.S. BOND INDEX FUND",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$61.44",
+      "ItemIssueId": "276452177",
+      "AcctgRuleCd": "1"
+    },
+    {
       "Date": "06/02/2025",
       "Action": "Journal",
       "Symbol": "SNSXX",
