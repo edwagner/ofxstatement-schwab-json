@@ -2,117 +2,17 @@
   "FromDate": "12/20/2023",
   "ToDate": "02/11/2024",
   "TotalTransactionsAmount": "$526.12",
-  "PostedTransactions": [
-    {
-      "CheckNumber": null,
-      "Description": "Incoming Wire",
-      "Date": "10/10/2025",
-      "RunningBalance": "$5,727.13",
-      "Withdrawal": "",
-      "Deposit": "$399.00",
-      "Type": "WIRE"
-    },
-    {
-      "CheckNumber": null,
-      "Description": "Outgoing Wire",
-      "Date": "10/09/2025",
-      "RunningBalance": "$5,727.13",
-      "Withdrawal": "$400.00",
-      "Deposit": "",
-      "Type": "WIRE"
-    },
-    {
-      "CheckNumber": "101",
-      "Description": "Check Paid #101",
-      "Date": "10/01/2025",
-      "RunningBalance": "$4,522.22",
-      "Withdrawal": "$870.80",
-      "Deposit": "",
-      "Type": "CHECK"
-    },
-    {
-      "CheckNumber": null,
-      "Description": "Deposit Mobile Banking",
-      "Date": "07/12/2025",
-      "RunningBalance": "$668.19",
-      "Withdrawal": "",
-      "Deposit": "$8.00",
-      "Type": "DEPOSIT"
-    },
-    {
-      "CheckNumber": null,
-      "Description": "ATM Fee Rebate",
-      "Date": "06/30/2025",
-      "RunningBalance": "$486.89",
-      "Withdrawal": "",
-      "Deposit": "$14.50",
-      "Type": "ATMREBATE"
-    },
-    {
-      "CheckNumber": null,
-      "Description": "ABC COMPANY LIMITED",
-      "Date": "06/25/2025",
-      "RunningBalance": "$489.17",
-      "Withdrawal": "$30.79",
-      "Deposit": "",
-      "Type": "VISA"
-    },
-    {
-      "CheckNumber": null,
-      "Description": "TRIAL ACCTVERIFY 250615",
-      "Date": "06/16/2025",
-      "RunningBalance": "$549.87",
-      "Withdrawal": "$0.46",
-      "Deposit": "",
-      "Type": "ACH"
-    },
-    {
-      "CheckNumber": null,
-      "Description": "TRIAL ACCTVERIFY 250615",
-      "Date": "06/16/2025",
-      "RunningBalance": "$550.33",
-      "Withdrawal": "",
-      "Deposit": "$0.25",
-      "Type": "ACH"
-    },
-    {
-      "CheckNumber": null,
-      "Description": "ZELLE TO JOHN DOE",
-      "Date": "06/15/2025",
-      "RunningBalance": "$700.00",
-      "Withdrawal": "$100.00",
-      "Deposit": "",
-      "Type": "DEBIT"
-    },
-    {
-      "CheckNumber": null,
-      "Description": "CHASE MAIN ST ANYTOWN",
-      "Date": "06/07/2025",
-      "RunningBalance": "$929.53",
-      "Withdrawal": "$23.50",
-      "Deposit": "",
-      "Type": "ATM"
-    },
-    {
-      "CheckNumber": null,
-      "Description": "Interest Paid",
-      "Date": "05/30/2025",
-      "RunningBalance": "$100.03",
-      "Withdrawal": "",
-      "Deposit": "$0.03",
-      "Type": "INTADJUST"
-    },
-    {
-      "CheckNumber": null,
-      "Description": "Funds Transfer from Brokerage",
-      "Date": "05/29/2025",
-      "RunningBalance": "$100.00",
-      "Withdrawal": "",
-      "Deposit": "$100.00",
-      "Type": "TRANSFER"
-    }
-  ],
   "BrokerageTransactions": [
+    {
+      "Date": "06/10/2025",
+      "Action": "Advisor Fee",
+      "Symbol": "",
+      "Description": "MGMTFEE TO ADVISOR",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$419.08"
+    },
     {
       "Date": "06/02/2025",
       "Action": "Journal",
@@ -144,26 +44,6 @@
       "Amount": "-$100.00"
     },
     {
-      "Date": "03/21/2025",
-      "Action": "Special Dividend",
-      "Symbol": "MTUM",
-      "Description": "ISHARES MSCI USA MOMNTUMFCT ETF",
-      "Quantity": "",
-      "Price": "",
-      "Fees & Comm": "",
-      "Amount": "$19.59"
-    },
-    {
-      "Date": "06/10/2025",
-      "Action": "Advisor Fee",
-      "Symbol": "",
-      "Description": "MGMTFEE TO ADVISOR",
-      "Quantity": "",
-      "Price": "",
-      "Fees & Comm": "",
-      "Amount": "-$419.08"
-    },
-    {
       "Date": "05/15/2025",
       "Action": "NRA Tax Adj",
       "Symbol": "AAPL",
@@ -182,6 +62,16 @@
       "Price": "",
       "Fees & Comm": "",
       "Amount": "-$2.63"
+    },
+    {
+      "Date": "03/21/2025",
+      "Action": "Special Dividend",
+      "Symbol": "MTUM",
+      "Description": "ISHARES MSCI USA MOMNTUMFCT ETF",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$19.59"
     },
     {
       "Date": "02/28/2025 as of 01/28/2025",
@@ -487,6 +377,116 @@
       "Quantity": "100",
       "Fees & Comm": "",
       "Amount": "-$100.00"
+    }
+  ],
+  "PostedTransactions": [
+    {
+      "CheckNumber": null,
+      "Description": "Incoming Wire",
+      "Date": "10/10/2025",
+      "RunningBalance": "$5,727.13",
+      "Withdrawal": "",
+      "Deposit": "$399.00",
+      "Type": "WIRE"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "Outgoing Wire",
+      "Date": "10/09/2025",
+      "RunningBalance": "$5,727.13",
+      "Withdrawal": "$400.00",
+      "Deposit": "",
+      "Type": "WIRE"
+    },
+    {
+      "CheckNumber": "101",
+      "Description": "Check Paid #101",
+      "Date": "10/01/2025",
+      "RunningBalance": "$4,522.22",
+      "Withdrawal": "$870.80",
+      "Deposit": "",
+      "Type": "CHECK"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "Deposit Mobile Banking",
+      "Date": "07/12/2025",
+      "RunningBalance": "$668.19",
+      "Withdrawal": "",
+      "Deposit": "$8.00",
+      "Type": "DEPOSIT"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "ATM Fee Rebate",
+      "Date": "06/30/2025",
+      "RunningBalance": "$486.89",
+      "Withdrawal": "",
+      "Deposit": "$14.50",
+      "Type": "ATMREBATE"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "ABC COMPANY LIMITED",
+      "Date": "06/25/2025",
+      "RunningBalance": "$489.17",
+      "Withdrawal": "$30.79",
+      "Deposit": "",
+      "Type": "VISA"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "TRIAL ACCTVERIFY 250615",
+      "Date": "06/16/2025",
+      "RunningBalance": "$549.87",
+      "Withdrawal": "$0.46",
+      "Deposit": "",
+      "Type": "ACH"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "TRIAL ACCTVERIFY 250615",
+      "Date": "06/16/2025",
+      "RunningBalance": "$550.33",
+      "Withdrawal": "",
+      "Deposit": "$0.25",
+      "Type": "ACH"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "ZELLE TO JOHN DOE",
+      "Date": "06/15/2025",
+      "RunningBalance": "$700.00",
+      "Withdrawal": "$100.00",
+      "Deposit": "",
+      "Type": "DEBIT"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "CHASE MAIN ST ANYTOWN",
+      "Date": "06/07/2025",
+      "RunningBalance": "$929.53",
+      "Withdrawal": "$23.50",
+      "Deposit": "",
+      "Type": "ATM"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "Interest Paid",
+      "Date": "05/30/2025",
+      "RunningBalance": "$100.03",
+      "Withdrawal": "",
+      "Deposit": "$0.03",
+      "Type": "INTADJUST"
+    },
+    {
+      "CheckNumber": null,
+      "Description": "Funds Transfer from Brokerage",
+      "Date": "05/29/2025",
+      "RunningBalance": "$100.00",
+      "Withdrawal": "",
+      "Deposit": "$100.00",
+      "Type": "TRANSFER"
     }
   ]
 }
