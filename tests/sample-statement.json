@@ -188,16 +188,6 @@
       "Amount": "-$0.09"
     },
     {
-      "Date": "01/22/2024",
-      "Action": "Reinvest Shares",
-      "Symbol": "AAPL",
-      "Description": "Apple Inc.",
-      "Price": "$182.3362",
-      "Quantity": "0.5265",
-      "Fees & Comm": "",
-      "Amount": "-$96.00"
-    },
-    {
       "Date": "01/21/2024",
       "Action": "Security Transfer",
       "Symbol": "",
@@ -283,7 +273,26 @@
       "ItemIssueId": "993280518",
       "AcctgRuleCd": "1"
     },
-
+    {
+      "Date": "01/13/2024",
+      "Action": "Short Term Cap Gain",
+      "Symbol": "SWVXX",
+      "Description": "SCHWAB VALUE ADVANTAGE MONEY INV",
+      "Price": "",
+      "Quantity": "",
+      "Fees & Comm": "",
+      "Amount": "$0.01"
+    },
+    {
+      "Date": "01/12/2024",
+      "Action": "Long Term Cap Gain",
+      "Symbol": "SWVXX",
+      "Description": "SCHWAB VALUE ADVANTAGE MONEY INV",
+      "Price": "",
+      "Quantity": "",
+      "Fees & Comm": "",
+      "Amount": "$0.12"
+    },
     {
       "Date": "01/10/2024 as of 01/09/2024",
       "Action": "Bank Interest",
@@ -293,16 +302,6 @@
       "Quantity": "",
       "Fees & Comm": "",
       "Amount": "$0.30"
-    },
-    {
-      "Date": "12/29/2023",
-      "Action": "Short Term Cap Gain",
-      "Symbol": "SWVXX",
-      "Description": "SCHWAB VALUE ADVANTAGE MONEY INV",
-      "Price": "",
-      "Quantity": "",
-      "Fees & Comm": "",
-      "Amount": "$0.01"
     },
     {
       "Date": "12/13/2023 as of 12/11/2023",
@@ -360,13 +359,13 @@
     },
     {
       "Date": "09/22/2023",
-      "Action": "Buy",
-      "Symbol": "SWVXX",
-      "Description": "SCHWAB VALUE ADVANTAGE MONEY INV",
-      "Price": "$1.00",
-      "Quantity": "500",
+      "Action": "Reinvest Shares",
+      "Symbol": "AAPL",
+      "Description": "Apple Inc.",
+      "Price": "$182.3362",
+      "Quantity": "0.5265",
       "Fees & Comm": "",
-      "Amount": "-$500.00"
+      "Amount": "-$96.00"
     },
     {
       "Date": "09/22/2023",

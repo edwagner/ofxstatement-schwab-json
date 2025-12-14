@@ -293,6 +293,26 @@ def test_special_qualified_dividend(statement):
     assert line.unit_price is None
 
 
+def test_cap_gain_short(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20240113-1")
+    assert line.trntype == "INCOME"
+    assert line.trntype_detailed == "CGSHORT"
+    assert line.units is None
+    assert line.amount == Decimal("0.01")
+    assert line.security_id == "SWVXX"
+    assert line.unit_price is None
+
+
+def test_cap_gain_long(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20240112-1")
+    assert line.trntype == "INCOME"
+    assert line.trntype_detailed == "CGLONG"
+    assert line.units is None
+    assert line.amount == Decimal("0.12")
+    assert line.security_id == "SWVXX"
+    assert line.unit_price is None
+
+
 def test_interest(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240110-1")
     assert line.trntype == "INVBANKTRAN"
@@ -351,6 +371,16 @@ def test_interest_adjustment(statement):
     assert line.security_id is None
     assert line.units is None
     assert line.unit_price is None
+
+
+def test_reinvest_shares(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20230922-2")
+    assert line.trntype == "BUYSTOCK"
+    assert line.trntype_detailed == "BUY"
+    assert line.units == Decimal("0.5265")
+    assert line.amount == -96
+    assert line.security_id == "AAPL"
+    assert line.unit_price == Decimal("182.3362")
 
 
 def test_buy(statement):
