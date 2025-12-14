@@ -24,7 +24,7 @@ def statement() -> ofxstatement.statement.Statement:
 def test_parsing(statement):
     assert statement is not None
     assert len(statement.lines) == 12
-    assert len(statement.invest_lines) == 36
+    assert len(statement.invest_lines) == 38
 
 
 def test_ids(statement):
@@ -293,6 +293,16 @@ def test_special_qualified_dividend(statement):
     assert line.unit_price is None
 
 
+def test_short_term_cap_gain_reinvestment(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20240113-2")
+    assert line.trntype == "INCOME"
+    assert line.trntype_detailed == "CGSHORT"
+    assert line.units is None
+    assert line.amount == Decimal("39.45")
+    assert line.security_id == "FXAIX"
+    assert line.unit_price is None
+
+
 def test_cap_gain_short(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240113-1")
     assert line.trntype == "INCOME"
@@ -300,6 +310,16 @@ def test_cap_gain_short(statement):
     assert line.units is None
     assert line.amount == Decimal("0.01")
     assert line.security_id == "SWVXX"
+    assert line.unit_price is None
+
+
+def test_long_term_cap_gain_reinvestment(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20240112-2")
+    assert line.trntype == "INCOME"
+    assert line.trntype_detailed == "CGLONG"
+    assert line.units is None
+    assert line.amount == Decimal("61.44")
+    assert line.security_id == "FXNAX"
     assert line.unit_price is None
 
 

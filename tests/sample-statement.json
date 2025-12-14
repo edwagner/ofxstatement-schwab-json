@@ -275,6 +275,18 @@
     },
     {
       "Date": "01/13/2024",
+      "Action": "Short Term Cap Gain Reinvest",
+      "Symbol": "FXAIX",
+      "Description": "FIDELITY 500 INDEX FUND",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$39.45",
+      "ItemIssueId": "278422687",
+      "AcctgRuleCd": "1"
+    },
+    {
+      "Date": "01/13/2024",
       "Action": "Short Term Cap Gain",
       "Symbol": "SWVXX",
       "Description": "SCHWAB VALUE ADVANTAGE MONEY INV",
@@ -282,6 +294,18 @@
       "Quantity": "",
       "Fees & Comm": "",
       "Amount": "$0.01"
+    },
+    {
+      "Date": "01/12/2024",
+      "Action": "Long Term Cap Gain Reinvest",
+      "Symbol": "FXNAX",
+      "Description": "FIDELITY U.S. BOND INDEX FUND",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$61.44",
+      "ItemIssueId": "276452177",
+      "AcctgRuleCd": "1"
     },
     {
       "Date": "01/12/2024",
