@@ -125,7 +125,7 @@ class SchwabJsonParser(AbstractStatementParser):
                 if action == "Returned Check" or action == "Wire Sent":
                     self.add_bank_line(id, date, "DEBIT", tran)
                 elif action == "Funds Received" or action == "MoneyLink Deposit":
-                    self.add_bank_line(id, date, "DEP", tran)
+                    self.add_bank_line(id, date, "CREDIT", tran)
                 elif (
                     action == "Bank Interest"
                     or action == "Bond Interest"

@@ -136,7 +136,7 @@ def test_split(statement):
 def test_funds_received(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240404-1")
     assert line.trntype == "INVBANKTRAN"
-    assert line.trntype_detailed == "DEP"
+    assert line.trntype_detailed == "CREDIT"
     assert line.amount == Decimal("5555.00")
     assert line.security_id is None
     assert line.units is None
@@ -146,7 +146,7 @@ def test_funds_received(statement):
 def test_moneylink_deposit(statement):
     line = next(x for x in statement.invest_lines if x.id == "20240403-1")
     assert line.trntype == "INVBANKTRAN"
-    assert line.trntype_detailed == "DEP"
+    assert line.trntype_detailed == "CREDIT"
     assert line.amount == Decimal("1000.00")
     assert line.security_id is None
     assert line.units is None
