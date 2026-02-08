@@ -24,13 +24,43 @@ def statement() -> ofxstatement.statement.Statement:
 def test_parsing(statement):
     assert statement is not None
     assert len(statement.lines) == 12
-    assert len(statement.invest_lines) == 38
+    assert len(statement.invest_lines) == 41
 
 
 def test_ids(statement):
     assert statement.lines[0].id == "20250529-1"
     assert statement.invest_lines[0].id == "20230922-1"
     assert statement.invest_lines[1].id == "20230922-2"
+
+
+def test_funds_paid(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20251230-1")
+    assert line.trntype == "INVBANKTRAN"
+    assert line.trntype_detailed == "DEBIT"
+    assert line.amount == Decimal("-134.77")
+    assert line.security_id is None
+    assert line.units is None
+    assert line.unit_price is None
+
+
+def test_auto_s1_debit(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20251229-1")
+    assert line.trntype == "INVBANKTRAN"
+    assert line.trntype_detailed == "DEBIT"
+    assert line.amount == Decimal("-879.97")
+    assert line.security_id is None
+    assert line.units is None
+    assert line.unit_price is None
+
+
+def test_auto_s1_credit(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20251216-1")
+    assert line.trntype == "INVBANKTRAN"
+    assert line.trntype_detailed == "CREDIT"
+    assert line.amount == Decimal("220.11")
+    assert line.security_id is None
+    assert line.units is None
+    assert line.unit_price is None
 
 
 def test_advisor_fee(statement):

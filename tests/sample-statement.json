@@ -4,6 +4,39 @@
   "TotalTransactionsAmount": "$526.12",
   "BrokerageTransactions": [
     {
+      "Date": "12/30/2025",
+      "Action": "Funds Paid",
+      "Symbol": "",
+      "Description": "SCHWAB ONE CHECK 000303",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$134.77",
+      "AcctgRuleCd": "1"
+    },
+    {
+      "Date": "12/29/2025",
+      "Action": "Auto S1 Debit",
+      "Symbol": "",
+      "Description": "CITI AUTOPAY PAYMENT",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$879.97",
+      "AcctgRuleCd": "1"
+    },
+        {
+      "Date": "12/16/2025",
+      "Action": "Auto S1 Credit",
+      "Symbol": "",
+      "Description": "STRIPE TRANSFER",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$220.11",
+      "AcctgRuleCd": "1"
+    },
+    {
       "Date": "06/10/2025",
       "Action": "Advisor Fee",
       "Symbol": "",
