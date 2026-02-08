@@ -122,11 +122,15 @@ class SchwabJsonParser(AbstractStatementParser):
             ):
                 self.add_transfer_line(id, date, tran)
             elif len(tran["Symbol"]) == 0:
-                if action == "Wire Sent" or (
-                    action == "Returned Check"
-                    and tran["Amount"].startswith("-")  # This is a debit, not a credit
+                if (
+                    action == "Wire Sent"
+                    or action == "Auto S1 Debit"
+                    or action == "Funds Paid"
+                    or (action == "Returned Check" and tran["Amount"].startswith("-"))
                 ):
                     self.add_bank_line(id, date, "DEBIT", tran)
+                elif action == "Auto S1 Credit":
+                    self.add_bank_line(id, date, "CREDIT", tran)
                 elif action == "Funds Received" or action == "MoneyLink Deposit":
                     self.add_bank_line(id, date, "DEP", tran)
                 elif (
