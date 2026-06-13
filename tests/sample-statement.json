@@ -4,6 +4,28 @@
   "TotalTransactionsAmount": "$526.12",
   "BrokerageTransactions": [
     {
+      "Date": "06/11/2026",
+      "Action": "Wire Funds Adj",
+      "Symbol": "",
+      "Description": "RETURNED WIRE",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$412.00",
+      "AcctgRuleCd": "1"
+    },
+    {
+      "Date": "06/10/2026 as of 06/09/2026",
+      "Action": "Misc Credits",
+      "Symbol": "",
+      "Description": "CUST SERVICE GEST",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "$5.00",
+      "AcctgRuleCd": "1"
+    },
+    {
       "Date": "05/01/2026",
       "Action": "Conversion",
       "Symbol": "CWEN",
@@ -458,6 +480,15 @@
     }
   ],
   "PostedTransactions": [
+    {
+      "CheckNumber": null,
+      "Description": "Customer Service Gesture",
+      "Date": "06/12/2026",
+      "RunningBalance": "$39.84",
+      "Withdrawal": "",
+      "Deposit": "$4.00",
+      "Type": "CREDIT"
+    },
     {
       "CheckNumber": null,
       "Description": "Incoming Wire",
