@@ -53,6 +53,7 @@ $ source .venv/bin/activate
 ### Upgrading Dependencies
 
 Run `uv lock --upgrade` to update all dependencies.
+Uprev the patch version of the project.
 
 ### Testing
 

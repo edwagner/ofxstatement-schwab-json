@@ -1,6 +1,6 @@
 [project]
 name = "ofxstatement-schwab-json"
-version = "0.8.0"
+version = "0.8.1"
 description = "ofxstatement plugin for Schwab JSON exports"
 authors = [{ name = "Ed Wagner", email = "ed@edwagner.org" }]
 requires-python = ">=3.10"
