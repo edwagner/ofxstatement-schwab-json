@@ -24,13 +24,24 @@ def statement() -> ofxstatement.statement.Statement:
 def test_parsing(statement):
     assert statement is not None
     assert len(statement.lines) == 12
-    assert len(statement.invest_lines) == 43
+    assert len(statement.invest_lines) == 44
 
 
 def test_ids(statement):
     assert statement.lines[0].id == "20250529-1"
     assert statement.invest_lines[0].id == "20230922-1"
     assert statement.invest_lines[1].id == "20230922-2"
+
+
+def test_buy_to_open(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20260820-1")
+    assert line.trntype == "BUYSTOCK"
+    assert line.trntype_detailed == "BUY"
+    assert line.units == 100
+    assert line.amount == Decimal("-3816.66")
+    assert line.security_id == "QQQ 12/01/2026 735.00 P"
+    assert line.unit_price == Decimal("38.16")
+    assert line.fees == Decimal("0.66")
 
 
 def test_conversion_in(statement):

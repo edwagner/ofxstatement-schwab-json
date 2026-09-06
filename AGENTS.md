@@ -38,7 +38,7 @@ To check for GitHub Dependabot security alerts and upgrade dependencies:
 ## Commit and PR guidelines
 
 * Run the full test suite (`uv run make all`) before committing.
-* Increment the version number as appropriate (semantic versioning).
+* Increment the version number in pyproject.toml as appropriate using semantic versioning.
 * Commit changes with a clear, conventional message, e.g.
   `chore(deps): Upgrade dependencies to fix security advisories`.
 * Wait for user confirmation before pushing a new branch to the remote
