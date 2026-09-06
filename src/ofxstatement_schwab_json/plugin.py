@@ -113,6 +113,9 @@ class SchwabJsonParser(AbstractStatementParser):
                 self.add_invexpense_line(id, date, tran)
             elif action == "Buy" or action == "Reinvest Shares":
                 self.add_buy_line(id, date, tran)
+            elif action == "Buy to Open":
+                # Options are quoted per-share but traded in contracts of 100 shares
+                self.add_buy_line(id, date, tran, contract_size=100)
             elif len(tran["Symbol"]) > 0 and (
                 action == "Conversion"
                 or action == "Journal"
@@ -162,7 +165,7 @@ class SchwabJsonParser(AbstractStatementParser):
             else:
                 raise Exception(f'Unrecognized action: "{action}"')
 
-    def add_buy_line(self, id, date, details):
+    def add_buy_line(self, id, date, details, contract_size=1):
         line = InvestStatementLine(
             id=id,
             date=date,
@@ -171,7 +174,7 @@ class SchwabJsonParser(AbstractStatementParser):
         line.trntype = "BUYSTOCK"
         line.trntype_detailed = "BUY"
         line.security_id = details["Symbol"]
-        line.units = Decimal(re.sub("[,]", "", details["Quantity"]))
+        line.units = Decimal(re.sub("[,]", "", details["Quantity"])) * contract_size
         line.unit_price = Decimal(re.sub("[$,]", "", details["Price"]))
         line.amount = Decimal(re.sub("[$,]", "", details["Amount"]))
         if len(details["Fees & Comm"]) > 0:
