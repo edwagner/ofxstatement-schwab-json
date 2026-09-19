@@ -109,6 +109,8 @@ class SchwabJsonParser(AbstractStatementParser):
                 self.add_income_line(id, date, "CGSHORT", tran)
             elif action == "Bank Interest" and len(tran["Symbol"]) > 0:
                 self.add_income_line(id, date, "INTEREST", tran)
+            elif action == "Foreign Tax Paid" and len(tran["Symbol"]) > 0:
+                self.add_invexpense_line(id, date, tran)
             elif action == "NRA Tax Adj" and len(tran["Symbol"]) > 0:
                 self.add_invexpense_line(id, date, tran)
             elif action == "Buy" or action == "Reinvest Shares":
@@ -121,6 +123,7 @@ class SchwabJsonParser(AbstractStatementParser):
                 or action == "Journal"
                 or action == "Journaled Shares"
                 or action == "Spin-off"
+                or action == "Stock Merger"
                 or action == "Stock Split"
                 or action == "Security Transfer"
             ):
