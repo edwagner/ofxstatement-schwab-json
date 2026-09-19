@@ -24,7 +24,7 @@ def statement() -> ofxstatement.statement.Statement:
 def test_parsing(statement):
     assert statement is not None
     assert len(statement.lines) == 12
-    assert len(statement.invest_lines) == 45
+    assert len(statement.invest_lines) == 47
 
 
 def test_ids(statement):
@@ -34,7 +34,7 @@ def test_ids(statement):
 
 
 def test_buy_to_open(statement):
-    line = next(x for x in statement.invest_lines if x.id == "20260820-1")
+    line = next(x for x in statement.invest_lines if x.id == "20260912-1")
     assert line.trntype == "BUYSTOCK"
     assert line.trntype_detailed == "BUY"
     assert line.units == 100
@@ -42,6 +42,26 @@ def test_buy_to_open(statement):
     assert line.security_id == "QQQ 12/01/2026 735.00 P"
     assert line.unit_price == Decimal("38.16")
     assert line.fees == Decimal("0.66")
+
+
+def test_merger_in(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20260911-2")
+    assert line.trntype == "TRANSFER"
+    assert line.trntype_detailed == "IN"
+    assert line.amount == Decimal("0")
+    assert line.security_id == "OKE"
+    assert line.units == Decimal("200")
+    assert line.unit_price == Decimal("0")
+
+
+def test_merger_out(statement):
+    line = next(x for x in statement.invest_lines if x.id == "20260911-1")
+    assert line.trntype == "TRANSFER"
+    assert line.trntype_detailed == "OUT"
+    assert line.amount == Decimal("0")
+    assert line.security_id == "682680103"
+    assert line.units == Decimal("-200")
+    assert line.unit_price == Decimal("0")
 
 
 def test_conversion_in(statement):

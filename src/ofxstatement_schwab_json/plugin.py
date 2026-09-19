@@ -123,6 +123,7 @@ class SchwabJsonParser(AbstractStatementParser):
                 or action == "Journal"
                 or action == "Journaled Shares"
                 or action == "Spin-off"
+                or action == "Stock Merger"
                 or action == "Stock Split"
                 or action == "Security Transfer"
             ):
