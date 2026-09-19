@@ -110,6 +110,17 @@
       "Amount": "-$100.00"
     },
     {
+      "Date": "05/16/2025",
+      "Action": "Foreign Tax Paid",
+      "Symbol": "VALE",
+      "Description": "VALE S A FSPONSORED ADR 1 ADR REPS 1 ORD SHS",
+      "Quantity": "",
+      "Price": "",
+      "Fees & Comm": "",
+      "Amount": "-$53.43",
+      "AcctgRuleCd": "1"
+    },
+    {
       "Date": "05/15/2025",
       "Action": "NRA Tax Adj",
       "Symbol": "AAPL",
